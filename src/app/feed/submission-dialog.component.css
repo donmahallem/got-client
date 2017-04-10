@@ -1,0 +1,13 @@
+div.spacer{
+    flex: auto;
+}
+md-dialog-content{
+    background-color: #eeeeee;
+}
+
+md-icon.positive{
+    color:#4CAF50; /* GREEN500*/
+}
+md-icon.negative{
+    color:#F44336; /* RED500 */
+}

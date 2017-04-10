@@ -1,0 +1,21 @@
+<md-nav-list>
+    <md-divider></md-divider>
+    <h3 md-subheader>Feed Filter</h3>
+    <form [formGroup]="feedFilterForm" novalidate>
+        <md-list-item>
+            <md-checkbox formControlName="store" labelPosition="after">Store</md-checkbox>
+        </md-list-item>
+        <md-list-item>
+            <md-checkbox formControlName="trade" labelPosition="after">Trade</md-checkbox>
+        </md-list-item>
+        <md-list-item>
+            <md-checkbox formControlName="question" labelPosition="after">Question</md-checkbox>
+        </md-list-item>
+        <md-list-item>
+            <md-checkbox formControlName="psa" labelPosition="after">PSA</md-checkbox>
+        </md-list-item>
+        <md-list-item>
+            <md-checkbox formControlName="pricecheck" labelPosition="after">Pricecheck</md-checkbox>
+        </md-list-item>
+    </form>
+</md-nav-list>

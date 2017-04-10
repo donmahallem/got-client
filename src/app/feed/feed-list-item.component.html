@@ -1,0 +1,5 @@
+<md-list-item (click)="submissionSelected(submission)">
+    <md-icon md-list-icon>{{icon}}</md-icon>
+    <h4 md-line>{{submission.title}}</h4>
+    <p md-line>submitted <span title="{{submission.created_utc * 1000 | date:'medium'}}">{{submission.created_utc * 1000 | momentFromNow }}</span>        by {{submission.author}}</p>
+</md-list-item>
