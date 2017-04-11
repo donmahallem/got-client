@@ -14,6 +14,15 @@ import {
 import { Subscription } from 'rxjs/Subscription';
 import { FeedFilter } from "./feed-filter.model";
 import { FeedService } from "./feed.service";
+import {
+    Router,
+    ActivatedRoute
+} from "@angular/router"
+import {
+    MdDialog,
+    MdDialogRef
+} from '@angular/material';
+import { SubmissionDialogComponent } from "./submission-dialog.component";
 
 @Component({
     selector: "feed-list",
@@ -23,15 +32,19 @@ import { FeedService } from "./feed.service";
 export class FeedListComponent implements OnDestroy {
 
     private submissionsCache: RedditSubmissions = [];
-    private submissions: RedditSubmissions = [
+    submissions: RedditSubmissions = [
     ];
 
     private feedFilter: FeedFilter;
     private filterSubscription: Subscription;
+    private urlSubscription: Subscription;
     constructor(private redditApiService: RedditApiService,
         private gotLive: GotLiveService,
         private feedService: FeedService,
-        private gotApiCache: GotApiCacheService) {
+        private gotApiCache: GotApiCacheService,
+        private router: Router,
+        private dialog: MdDialog,
+        private activatedRoute: ActivatedRoute) {
         this.filterSubscription = feedService.feedFilterObservable.subscribe(filter => {
             this.feedFilter = filter;
             console.log(filter);
@@ -46,23 +59,37 @@ export class FeedListComponent implements OnDestroy {
                 this.submissionsCache = subs;
                 this.updateList();
             });
+        this.urlSubscription = this.activatedRoute.url.subscribe(vals => {
+            if (vals.length === 2 && vals[0].path === "submission") {
+                this.gotLive.getSubmission(vals[1].path)
+                    .then(sub => {
+                        let dialogRef = this.dialog.open(SubmissionDialogComponent, { data: sub });
+                        dialogRef.afterClosed().subscribe(result => {
+                            this.router.navigate(["/feed"]);
+                        });
+                    })
+            }
+        });
     }
 
     private updateList() {
         this.submissions = this.submissionsCache.filter(sub => {
-            if (sub.link_flair_text.match(/^trade$/i) && this.feedFilter.trade) {
-                return true;
-            } else if (sub.link_flair_text.match(/^store$/i) && this.feedFilter.store) {
-                return true;
-            } else if (sub.link_flair_text.match(/^question$/i) && this.feedFilter.question) {
-                return true;
-            } else if (sub.link_flair_text.match(/^psa$/i) && this.feedFilter.psa) {
-                return true;
-            } else if (sub.link_flair_text.match(/^pricecheck$/i) && this.feedFilter.pricecheck) {
-                return true;
-            } else {
-                return false;
+            if (sub.link_flair_text) {
+                if (sub.link_flair_text.match(/^trade$/i) && this.feedFilter.trade) {
+                    return true;
+                } else if (sub.link_flair_text.match(/^store$/i) && this.feedFilter.store) {
+                    return true;
+                } else if (sub.link_flair_text.match(/^question$/i) && this.feedFilter.question) {
+                    return true;
+                } else if (sub.link_flair_text.match(/^psa$/i) && this.feedFilter.psa) {
+                    return true;
+                } else if (sub.link_flair_text.match(/^pricecheck$/i) && this.feedFilter.pricecheck) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
+            return true;
         });
         this.submissions.sort(function (a, b) {
             return b.created_utc - a.created_utc;
@@ -71,5 +98,7 @@ export class FeedListComponent implements OnDestroy {
 
 
     public ngOnDestroy() {
+        this.urlSubscription.unsubscribe();
+        this.filterSubscription.unsubscribe();
     }
 }

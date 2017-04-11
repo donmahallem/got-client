@@ -22,6 +22,9 @@ import {
     MaterialModule
 } from '@angular/material';
 import {
+    BrowserAnimationsModule
+} from '@angular/platform-browser/animations';
+import {
     AppConfigService,
     GotAuthService,
     GotApiService,
@@ -42,6 +45,7 @@ export function configServiceFactory(config: AppConfigService) {
         BrowserModule,
         FormsModule,
         HttpModule,
+        BrowserAnimationsModule,
         MaterialModule,
         AppRoutingModule
     ],

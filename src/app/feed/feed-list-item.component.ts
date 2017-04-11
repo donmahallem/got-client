@@ -5,7 +5,10 @@ import {
     Input,
     SimpleChanges
 } from '@angular/core';
-
+import {
+    Router,
+    ActivatedRoute
+} from "@angular/router"
 import {
     trigger,
     state,
@@ -23,33 +26,28 @@ import {
     MdDialog,
     MdDialogRef
 } from '@angular/material';
+import {
+    GotLiveService
+} from "./../services/";
+
+import {
+    Logger
+} from "./../util/logger";
 import { SubmissionDialogComponent } from "./submission-dialog.component";
 
 @Component({
     selector: "feed-list-item",
     templateUrl: './feed-list-item.component.html',
-    styleUrls: ['./feed-list-item.component.css'],
-    animations: [
-        trigger('heroState', [
-            state('inactive', style({
-                backgroundColor: '#eee',
-                transform: 'scale(1)'
-            })),
-            state('active', style({
-                backgroundColor: '#cfd8dc',
-                transform: 'scale(1.1)'
-            })),
-            transition('inactive => active', animate('100ms ease-in')),
-            transition('active => inactive', animate('100ms ease-out'))
-        ])
-    ]
+    styleUrls: ['./feed-list-item.component.css']
 })
 export class FeedListItemComponent implements OnDestroy, OnChanges {
 
     @Input()
-    private submission: RedditSubmission;
-    private icon: string;
-    constructor(private dialog: MdDialog) {
+    public submission: RedditSubmission;
+    public icon: string;
+    constructor(
+        private dialog: MdDialog,
+        private router: Router) {
     }
 
     public ngOnChanges(changes: SimpleChanges) {
@@ -70,8 +68,6 @@ export class FeedListItemComponent implements OnDestroy, OnChanges {
     }
 
     public submissionSelected(submission: RedditSubmission) {
-        let dialogRef = this.dialog.open(SubmissionDialogComponent, { data: submission });
-        dialogRef.afterClosed().subscribe(result => {
-        });
+        this.router.navigate(['/feed/submission', submission.id]);
     }
 }

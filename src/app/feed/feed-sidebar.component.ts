@@ -24,7 +24,7 @@ export class FeedSidebarComponent implements OnDestroy {
 
     private feedFilter: FeedFilter;
     private filterSubscription: Subscription;
-    private feedFilterForm: FormGroup;
+    feedFilterForm: FormGroup;
     constructor(private feedService: FeedService) {
         /*this.filterSubscription = feedService.feedFilterObservable.subscribe(filter => {
             this.feedFilter = filter;

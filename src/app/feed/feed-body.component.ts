@@ -10,7 +10,7 @@ import { GotApiService } from "./../services/";
     styleUrls: ['./feed-body.component.css']
 })
 export class FeedBodyComponent implements OnDestroy {
-    private sidebarOpen: boolean;
+    sidebarOpen: boolean;
     constructor(private feedService: FeedService,
         private apiService: GotApiService) {
 

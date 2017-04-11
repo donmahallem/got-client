@@ -27,15 +27,16 @@ export class SnuDownPipe implements PipeTransform {
     styleUrls: ["submission-dialog.component.css"]
 })
 export class SubmissionDialogComponent {
-    private submission: RedditSubmission;
-    private voteState: VoteState = VoteState.NEUTRAL;
+    public submission: RedditSubmission;
+    public voteState: VoteState = VoteState.NEUTRAL;
     constructor(public dialogRef: MdDialogRef<SubmissionDialogComponent>,
         private gotApi: GotApiService) {
-        this.submission = this.dialogRef.config.data;
+        //THIS IS WHACKY AS FCK
+        this.submission = this.dialogRef._containerInstance.dialogConfig.data;
 
     }
 
-    private upvote() {
+    public upvote() {
         this.voteState = VoteState.POSITIVE;
         this.gotApi.upvote(this.submission)
             .subscribe(succes => {
@@ -43,7 +44,7 @@ export class SubmissionDialogComponent {
             });
     }
 
-    private downvote() {
+    public downvote() {
         this.voteState = VoteState.NEGATIVE;
     }
 }

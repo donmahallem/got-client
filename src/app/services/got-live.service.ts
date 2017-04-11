@@ -73,9 +73,8 @@ export class GotLiveService {
                 });
             this.submissionSource.next(sub);
         });
-
         setInterval(() => {
-            const timestamp: number = moment().subtract(1, "hour").milliseconds();
+            const timestamp: number = moment().subtract(1, "hour").unix();
             this.deleteSubmissionsOlderThan(timestamp)
                 .then(deleted => {
                     Logger.info("Evicted", deleted, "submissions from db");
