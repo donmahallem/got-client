@@ -48,7 +48,7 @@ export class FeedListItemComponent implements OnDestroy, OnChanges {
     public ngOnDestroy() {
     }
 
-    public submissionSelected(submission: RedditSubmission) {
-        this.router.navigate(['/feed/submission', submission.id]);
+    public click() {
+        this.router.navigate(['/feed/submission', this.submission.id]);
     }
 }

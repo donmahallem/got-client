@@ -2,7 +2,8 @@ import {
     TestBed,
     async,
     ComponentFixture,
-    inject
+    inject,
+    tick
 } from '@angular/core/testing';
 import {
     DebugElement,
@@ -44,27 +45,28 @@ import {
     Router
 } from "@angular/router";
 
+
+const expectedSubmission: RedditSubmission = {
+    title: "[store] test title",
+    created_utc: 2999,
+    name: "t3_abcde",
+    id: "abcde"
+}
 @Component({
     template: "<feed-list-item  [submission]=\"submission\"></feed-list-item>",
 })
 class TestHostComponent {
-    submission: RedditSubmission = {
-        title: "[store] test title",
-        created_utc: 2999,
-        name: "t3_abcde",
-        id: "abcde"
-    }
+    submission = expectedSubmission;
 }
 class RouterStub {
     navigate(url: string[]): Promise<boolean> {
-        console.log("tried ", url);
         return Promise.resolve(true);
     }
 }
 describe('FeedListItemComponent', () => {
     let testHost: TestHostComponent;
     let testHostFixture: ComponentFixture<TestHostComponent>;
-
+    let router: Router;
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
@@ -72,7 +74,6 @@ describe('FeedListItemComponent', () => {
                 FeedListItemComponent,
                 MomentFromNowPipe
             ], imports: [
-                RouterTestingModule,
                 MaterialModule
             ],
             providers: [
@@ -82,7 +83,7 @@ describe('FeedListItemComponent', () => {
                 }]
         }).compileComponents();
         testHostFixture = TestBed.createComponent(TestHostComponent);
-
+        router = TestBed.get(Router);
         // query for the title <h1> by CSS element selector
         testHostFixture.detectChanges();
     }));
@@ -97,4 +98,17 @@ describe('FeedListItemComponent', () => {
         expect(iconDebugElement.nativeElement.textContent).toEqual("store");
     });
 
+    it("should have same submission as host element", () => {
+        let listItemElement: DebugElement = testHostFixture.debugElement.query(By.css('feed-list-item'));
+        expect(listItemElement.componentInstance.submission).toBe(expectedSubmission);
+    });
+
+    it("should trigger route by click", () => {
+        const spy = spyOn(router, 'navigate');
+        let listItemElement: DebugElement = testHostFixture.debugElement.query(By.css('md-list-item'));
+        click(listItemElement);
+        expect(spy.calls.count()).toEqual(1);
+        //console.log(navArgs);
+        //expect(navArgs.args[0].join()).toEqual("store");
+    });
 });
