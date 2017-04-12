@@ -6,34 +6,17 @@ import {
     SimpleChanges
 } from '@angular/core';
 import {
-    Router,
-    ActivatedRoute
+    Router
 } from "@angular/router"
-import {
-    trigger,
-    state,
-    style,
-    animate,
-    transition
-} from "@angular/animations";
-import * as moment from "moment";
-
 import {
     RedditSubmission
 } from "./../models/"
-import { RedditApiService } from "./../services/reddit-api.service";
-import {
-    MdDialog,
-    MdDialogRef
-} from '@angular/material';
-import {
-    GotLiveService
-} from "./../services/";
-
 import {
     Logger
 } from "./../util/logger";
-import { SubmissionDialogComponent } from "./submission-dialog.component";
+import {
+    SubmissionDialogComponent
+} from "./submission-dialog.component";
 
 @Component({
     selector: "feed-list-item",
@@ -45,9 +28,7 @@ export class FeedListItemComponent implements OnDestroy, OnChanges {
     @Input()
     public submission: RedditSubmission;
     public icon: string;
-    constructor(
-        private dialog: MdDialog,
-        private router: Router) {
+    constructor(private router: Router) {
     }
 
     public ngOnChanges(changes: SimpleChanges) {

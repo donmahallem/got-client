@@ -16,13 +16,14 @@ import {
     RedditSubmissions,
     RedditListingResponse
 } from './../models/';
+
 @Injectable()
 export class GotAuthService {
     private heroesUrl = 'https://api.reddit.com/r/GlobalOffensiveTrade/new';  // URL to web API
     constructor(private http: Http) { }
 
     public get access_token(): string {
-        return sessionStorage.getItem("got_access_token");
+        return window.sessionStorage.getItem("got_access_token");
     }
 
     public refreshAccessToken(): Observable<boolean> {
@@ -41,8 +42,8 @@ export class GotAuthService {
     }
 
     private storeTokens(tokens: { access_token: string, refresh_token: string }) {
-        sessionStorage.setItem("got_access_token", tokens.access_token);
-        sessionStorage.setItem("got_refresh_token", tokens.refresh_token);
+        window.sessionStorage.setItem("got_access_token", tokens.access_token);
+        window.sessionStorage.setItem("got_refresh_token", tokens.refresh_token);
     }
 
     public exchangeCode(code: string): Observable<boolean> {
