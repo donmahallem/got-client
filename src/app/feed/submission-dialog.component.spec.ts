@@ -58,7 +58,7 @@ import { Observable } from 'rxjs/Observable';
 
 class GotApiServiceStub {
     public upvote(item: string | RedditSubmission): Observable<boolean> {
-        return Observable.create(true);
+        return Observable.of(true);
     }
 }
 
