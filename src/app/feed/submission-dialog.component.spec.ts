@@ -193,7 +193,13 @@ describe('SubmissionDialogComponent', () => {
         click(btnDebugElement);
         //expect(spy.calls.count()).toEqual(1);
         //expect(spy.calls.argsFor(0)).toEqual([VoteState.NEGATIVE]);
-        expect(btnDebugElement.query(By.css("")).classes).toContain("positive");
+    });
+    it("should render a positive vote", () => {
+        let btnDebugElement: DebugElement = viewContainerFixture.debugElement.query(By.css("button[md-icon-button].btnUpvote"));
+        let iconDebugElement: DebugElement = btnDebugElement.query(By.css("md-icon"));
+        dialogRef.componentInstance.voteState = VoteState.POSITIVE;
+        viewContainerFixture.detectChanges();
+        expect(iconDebugElement.classes).toContain("positive");
     });
     /*
         it("should highlight upvote button", () => {
