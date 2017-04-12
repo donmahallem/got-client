@@ -4,7 +4,8 @@ import {
     ComponentFixture
 } from '@angular/core/testing';
 import {
-    DebugElement
+    DebugElement,
+    Component
 } from '@angular/core';
 import {
     MdIcon,
@@ -16,9 +17,6 @@ import {
 import {
     FeedListItemComponent
 } from './feed-list-item.component';
-import {
-    RouterTestingModule
-} from '@angular/router/testing';
 import {
     GotAuthService
 } from "./../services";
@@ -35,44 +33,51 @@ import {
 import {
     RouterTestingModule
 } from '@angular/router/testing';
+import {
+    RedditSubmission
+} from "./../models/reddit-submission.model";
 
-class GotAuthServiceStub {
-
+@Component({
+    template: "<feed-list-item  [submission]=\"submission\"></feed-list-item>",
+})
+class TestHostComponent {
+    submission: RedditSubmission = {
+        title: "[store] test title",
+        created_utc: 2999,
+        name: "t3_abcde"
+    }
 }
 
 describe('FeedListItemComponent', () => {
-    let comp: FeedListItemComponent;
-    let fixture: ComponentFixture<FeedListItemComponent>;
-    let de: DebugElement;
-    let el: HTMLElement;
+    let testHost: TestHostComponent;
+    let testHostFixture: ComponentFixture<TestHostComponent>;
+
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
+                TestHostComponent,
                 FeedListItemComponent,
                 MomentFromNowPipe
             ], imports: [
                 RouterTestingModule,
                 MaterialModule
-            ],
-            providers: [{
-                provide: GotAuthService,
-                useValue: GotAuthServiceStub
-            }]
+            ]
         }).compileComponents();
-        fixture = TestBed.createComponent(FeedListItemComponent);
-
-        comp = fixture.componentInstance; // BannerComponent test instance
+        testHostFixture = TestBed.createComponent(TestHostComponent);
 
         // query for the title <h1> by CSS element selector
-        de = fixture.debugElement.query(By.css('h4'));
-        el = de.nativeElement;
+        testHostFixture.detectChanges();
     }));
 
 
-    it(`should have as title 'app works!'`, async(() => {
-        const fixture = TestBed.createComponent(FeedListItemComponent);
-        const app = fixture.debugElement.componentInstance;
-        expect(app.title).toEqual('app works!');
+    it("should have as title '[store] test title'", async(() => {
+        let titleDebugElement: DebugElement = testHostFixture.debugElement.query(By.css('h4'));
+        expect(titleDebugElement.nativeElement.textContent).toEqual("[store] test title");
     }));
 
+
+    it("should have store as icon", async(() => {
+        let iconDebugElement: DebugElement = testHostFixture.debugElement.query(By.css('md-icon'));
+        expect(iconDebugElement.nativeElement.textContent).toEqual("store");
+    }));
 });
