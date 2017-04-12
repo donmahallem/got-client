@@ -119,6 +119,8 @@ describe('SubmissionDialogComponent', () => {
     let testViewContainerRef: ViewContainerRef;
     let viewContainerFixture: ComponentFixture<ComponentWithChildViewContainer>;
     let dialogRef: MdDialogRef<SubmissionDialogComponent>;
+    let btnUpvoteDebugElement: DebugElement;
+    let btnDownvoteDebugElement: DebugElement;
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
@@ -139,6 +141,8 @@ describe('SubmissionDialogComponent', () => {
             viewContainerRef: testViewContainerRef,
             data: expectedSubmission
         });
+        btnUpvoteDebugElement = viewContainerFixture.debugElement.query(By.css("button[md-icon-button].btnUpvote"));
+        btnDownvoteDebugElement = viewContainerFixture.debugElement.query(By.css("button[md-icon-button].btnDownvote"));
         viewContainerFixture.detectChanges();
     }));
 
@@ -195,11 +199,20 @@ describe('SubmissionDialogComponent', () => {
         //expect(spy.calls.argsFor(0)).toEqual([VoteState.NEGATIVE]);
     });
     it("should render a positive vote", () => {
-        let btnDebugElement: DebugElement = viewContainerFixture.debugElement.query(By.css("button[md-icon-button].btnUpvote"));
-        let iconDebugElement: DebugElement = btnDebugElement.query(By.css("md-icon"));
+        let iconDebugElement: DebugElement = btnUpvoteDebugElement.query(By.css("md-icon"));
         dialogRef.componentInstance.voteState = VoteState.POSITIVE;
         viewContainerFixture.detectChanges();
-        expect(iconDebugElement.classes).toContain("positive");
+        expect(iconDebugElement.classes).toEqual(jasmine.objectContaining({
+            positive: true
+        }));
+    });
+    it("should render a negative vote", () => {
+        let iconDebugElement: DebugElement = btnDownvoteDebugElement.query(By.css("md-icon"));
+        dialogRef.componentInstance.voteState = VoteState.NEGATIVE;
+        viewContainerFixture.detectChanges();
+        expect(iconDebugElement.classes).toEqual(jasmine.objectContaining({
+            negative: true
+        }));
     });
     /*
         it("should highlight upvote button", () => {
