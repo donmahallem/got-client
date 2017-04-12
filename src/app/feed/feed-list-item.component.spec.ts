@@ -32,6 +32,10 @@ import {
 import {
     MaterialModule
 } from '@angular/material';
+import {
+    RouterTestingModule
+} from '@angular/router/testing';
+
 class GotAuthServiceStub {
 
 }
@@ -47,6 +51,7 @@ describe('FeedListItemComponent', () => {
                 FeedListItemComponent,
                 MomentFromNowPipe
             ], imports: [
+                RouterTestingModule,
                 MaterialModule
             ],
             providers: [{
