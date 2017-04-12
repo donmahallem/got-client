@@ -90,7 +90,7 @@ describe('FeedListItemComponent', () => {
 
     it("should have as title '[store] test title'", () => {
         let titleDebugElement: DebugElement = testHostFixture.debugElement.query(By.css('h4'));
-        expect(titleDebugElement.nativeElement.textContent).toEqual("[store] test title");
+        expect(titleDebugElement.nativeElement.textContent).toEqual(expectedSubmission.title);
     });
 
     it("should have store as icon", () => {

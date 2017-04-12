@@ -33,7 +33,6 @@ export class SubmissionDialogComponent {
         private gotApi: GotApiService) {
         //THIS IS WHACKY AS FCK
         this.submission = this.dialogRef._containerInstance.dialogConfig.data;
-
     }
 
     public upvote() {
