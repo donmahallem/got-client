@@ -15,7 +15,8 @@ import * as snudown from "snudown-js";
 import { GotApiService } from "./../services/got-api.service";
 
 import {
-} from "dom";
+    Logger
+} from "./../util/";
 
 
 @Pipe({ name: 'snudown' })
@@ -38,16 +39,12 @@ export class SubmissionDialogComponent {
         this.submission = this.dialogRef._containerInstance.dialogConfig.data;
     }
 
-    public upvote() {
+    public vote(state: VoteState): void {
         this.voteState = VoteState.POSITIVE;
         this.gotApi.upvote(this.submission)
             .subscribe(succes => {
-                console.log(succes);
+                Logger.log(succes);
             });
-    }
-
-    public downvote() {
-        this.voteState = VoteState.NEGATIVE;
     }
 
     public openInNewTab(url: string): void {
@@ -55,6 +52,9 @@ export class SubmissionDialogComponent {
         win.focus();
     }
 
+    /**
+     * opens the reddit thread corresponding to this submission
+     */
     public openRedditThread(): void {
         this.openInNewTab(this.submission.url);
     }

@@ -42,8 +42,9 @@ import {
     GotApiService
 } from "./../services/"
 import {
-    RedditSubmission
-} from "./../models/reddit-submission.model";
+    RedditSubmission,
+    VoteState
+} from "./../models";
 import {
     click
 } from "./../../testing/";
@@ -53,9 +54,12 @@ import {
 import {
     BrowserAnimationsModule
 } from "@angular/platform-browser/animations";
+import { Observable } from 'rxjs/Observable';
 
 class GotApiServiceStub {
-
+    public upvote(item: string | RedditSubmission): Observable<boolean> {
+        return Observable.create(true);
+    }
 }
 
 @Directive({ selector: 'dir-with-view-container' })
@@ -172,4 +176,32 @@ describe('SubmissionDialogComponent', () => {
         expect(spy.calls.count()).toEqual(1);
         expect(spy.calls.argsFor(0)).toEqual([expectedSubmission.url]);
     });
+
+    it("should upvote successfully", () => {
+        let btnDebugElement: DebugElement = viewContainerFixture.debugElement.query(By.css("button[md-icon-button].btnUpvote"));
+        let gotApi: GotApiService = TestBed.get(GotApiService);
+        let spy = spyOn(gotApi, "upvote");
+        click(btnDebugElement);
+        expect(spy.calls.count()).toEqual(1);
+        expect(spy.calls.argsFor(0)).toEqual([VoteState.POSITIVE]);
+    });
+
+    it("should downvote successfully", () => {
+        let btnDebugElement: DebugElement = viewContainerFixture.debugElement.query(By.css("button[md-icon-button].btnDownvote"));
+        let gotApi: GotApiService = TestBed.get(GotApiService);
+        let spy = spyOn(gotApi, "upvote");
+        click(btnDebugElement);
+        expect(spy.calls.count()).toEqual(1);
+        expect(spy.calls.argsFor(0)).toEqual([VoteState.NEGATIVE]);
+        expect(btnDebugElement.query(By.css("")).classes).toContain("positive");
+    });
+    /*
+        it("should highlight upvote button", () => {
+            let btnDebugElement: DebugElement = viewContainerFixture.debugElement.query(By.css("button[md-icon-button].btnUpvote"));
+            let gotApi: GotApiService = TestBed.get(GotApiService);
+            let spy = spyOn(gotApi, "upvote");
+            click(btnDebugElement);
+            expect(spy.calls.count()).toEqual(1);
+            expect(spy.calls.argsFor(0)).toEqual([VoteState.POSITIVE]);
+        });*/
 });

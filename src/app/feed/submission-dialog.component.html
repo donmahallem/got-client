@@ -3,10 +3,10 @@
     <div [innerHTML]="submission.selftext|snudown"></div>
 </md-dialog-content>
 <div md-dialog-actions>
-    <button md-icon-button (click)="upvote()" class="btnUpvote">
+    <button md-icon-button (click)="vote(1)" class="btnUpvote">
         <md-icon [ngClass]="{positive:voteState==1}">thumb_up</md-icon>
     </button>
-    <button md-icon-button (click)="downvote()" class="btnDownvote">
+    <button md-icon-button (click)="vote(-1)" class="btnDownvote">
         <md-icon [ngClass]="{negative:voteState==-1}">thumb_down</md-icon>
     </button>
     <div class="spacer"></div>
