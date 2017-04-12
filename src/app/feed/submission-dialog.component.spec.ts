@@ -155,4 +155,10 @@ describe('SubmissionDialogComponent', () => {
         expect(titleDebugElement.nativeElement.textContent).toEqual(expectedSubmission.title);
     });
 
+    it("should set author external anchor", () => {
+        let btnDebugElement: DebugElement = viewContainerFixture.debugElement.query(By.css("button[md-icon-button].btnRedditUser"));
+        let spy = spyOn(dialogRef.componentInstance, "openInNewTab");
+        click(btnDebugElement);
+        expect(spy.calls.count()).toEqual(1);
+    });
 });

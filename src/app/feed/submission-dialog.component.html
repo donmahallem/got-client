@@ -3,26 +3,17 @@
     <div [innerHTML]="submission.selftext|snudown"></div>
 </md-dialog-content>
 <div md-dialog-actions>
-    <button md-icon-button (click)="upvote()">
+    <button md-icon-button (click)="upvote()" class="btnUpvote">
         <md-icon [ngClass]="{positive:voteState==1}">thumb_up</md-icon>
     </button>
-    <button md-icon-button (click)="downvote()">
+    <button md-icon-button (click)="downvote()" class="btnDownvote">
         <md-icon [ngClass]="{negative:voteState==-1}">thumb_down</md-icon>
     </button>
     <div class="spacer"></div>
-    <a target="_blank">
-        <button md-icon-button>
-            <md-icon>link</md-icon>
-        </button>
-    </a>
-    <a target="_blank" href="{{submission.url}}">
-        <button md-icon-button>
-            <md-icon>launch</md-icon>
-        </button>
-    </a>
-    <a target="_blank" href="https://www.reddit.com/u/{{submission.author}}">
-        <button md-icon-button>
-            <md-icon>account_circle</md-icon>
-        </button>
-    </a>
+    <button md-icon-button class="btnRedditThread" (click)="openRedditThread()">
+        <md-icon>launch</md-icon>
+    </button>
+    <button md-icon-button class="btnRedditUser" (click)="openRedditAccount()">
+        <md-icon>account_circle</md-icon>
+    </button>
 </div>

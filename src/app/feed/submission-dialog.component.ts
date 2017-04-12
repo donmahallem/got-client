@@ -14,6 +14,9 @@ import {
 import * as snudown from "snudown-js";
 import { GotApiService } from "./../services/got-api.service";
 
+import {
+} from "dom";
+
 
 @Pipe({ name: 'snudown' })
 export class SnuDownPipe implements PipeTransform {
@@ -45,5 +48,18 @@ export class SubmissionDialogComponent {
 
     public downvote() {
         this.voteState = VoteState.NEGATIVE;
+    }
+
+    public openInNewTab(url: string): void {
+        let win = window.open(url, '_blank');
+        win.focus();
+    }
+
+    public openRedditThread(): void {
+        this.openInNewTab(this.submission.url);
+    }
+
+    public openRedditAccount(): void {
+        this.openInNewTab("https://www.reddit.com/u/" + this.submission.author);
     }
 }
