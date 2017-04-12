@@ -105,6 +105,7 @@ const expectedSubmission: RedditSubmission = {
     created_utc: 2999,
     name: "t3_abcde",
     id: "abcde",
+    url: "https://www.reddit.com/url/abc",
     author: "redditUser"
 }
 describe('SubmissionDialogComponent', () => {
@@ -156,11 +157,19 @@ describe('SubmissionDialogComponent', () => {
         expect(titleDebugElement.nativeElement.textContent).toEqual(expectedSubmission.title);
     });
 
-    it("should click author external anchor", () => {
+    it("should open author external", () => {
         let btnDebugElement: DebugElement = viewContainerFixture.debugElement.query(By.css("button[md-icon-button].btnRedditUser"));
         let spy = spyOn(dialogRef.componentInstance, "openInNewTab");
         click(btnDebugElement);
         expect(spy.calls.count()).toEqual(1);
         expect(spy.calls.argsFor(0)).toEqual(["https://www.reddit.com/u/redditUser"]);
+    });
+
+    it("should open submission external", () => {
+        let btnDebugElement: DebugElement = viewContainerFixture.debugElement.query(By.css("button[md-icon-button].btnRedditThread"));
+        let spy = spyOn(dialogRef.componentInstance, "openInNewTab");
+        click(btnDebugElement);
+        expect(spy.calls.count()).toEqual(1);
+        expect(spy.calls.argsFor(0)).toEqual([expectedSubmission.url]);
     });
 });
