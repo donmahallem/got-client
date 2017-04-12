@@ -29,6 +29,9 @@ import {
     BrowserDynamicTestingModule
 } from "@angular/platform-browser-dynamic/testing";
 
+import {
+    MaterialModule
+} from '@angular/material';
 class GotAuthServiceStub {
 
 }
@@ -42,16 +45,14 @@ describe('FeedListItemComponent', () => {
         TestBed.configureTestingModule({
             declarations: [
                 FeedListItemComponent,
-                MdIcon,
-                MdListItem,
                 MomentFromNowPipe
             ], imports: [
+                MaterialModule
             ],
             providers: [{
                 provide: GotAuthService,
                 useValue: GotAuthServiceStub
-            },
-                BrowserDynamicTestingModule]
+            }]
         }).compileComponents();
         fixture = TestBed.createComponent(FeedListItemComponent);
 
