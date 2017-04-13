@@ -10,7 +10,7 @@ export class FeedToolbarComponent {
     constructor(private feedService: FeedService) {
     }
 
-    public toggleSidebar() {
+    public toggleSidebar(): void {
         this.feedService.toggleSidebar();
     }
 }

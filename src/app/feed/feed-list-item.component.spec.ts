@@ -4,21 +4,21 @@ import {
     ComponentFixture,
     inject,
     tick
-} from '@angular/core/testing';
+} from "@angular/core/testing";
 import {
     DebugElement,
     Component
-} from '@angular/core';
+} from "@angular/core";
 import {
     MdIcon,
     MdListItem
-} from '@angular/material';
+} from "@angular/material";
 import {
     By
-} from '@angular/platform-browser';
+} from "@angular/platform-browser";
 import {
     FeedListItemComponent
-} from './feed-list-item.component';
+} from "./feed-list-item.component";
 import {
     GotAuthService
 } from "./../services";
@@ -31,10 +31,10 @@ import {
 
 import {
     MaterialModule
-} from '@angular/material';
+} from "@angular/material";
 import {
     RouterTestingModule
-} from '@angular/router/testing';
+} from "@angular/router/testing";
 import {
     RedditSubmission
 } from "./../models/reddit-submission.model";
@@ -63,7 +63,7 @@ class RouterStub {
         return Promise.resolve(true);
     }
 }
-describe('FeedListItemComponent', () => {
+describe("FeedListItemComponent", () => {
     let testHost: TestHostComponent;
     let testHostFixture: ComponentFixture<TestHostComponent>;
     let router: Router;
@@ -88,24 +88,24 @@ describe('FeedListItemComponent', () => {
         testHostFixture.detectChanges();
     }));
 
-    it("should have as title '[store] test title'", () => {
-        let titleDebugElement: DebugElement = testHostFixture.debugElement.query(By.css('h4'));
+    it("should have as title \"[store] test title\"", () => {
+        let titleDebugElement: DebugElement = testHostFixture.debugElement.query(By.css("h4"));
         expect(titleDebugElement.nativeElement.textContent).toEqual(expectedSubmission.title);
     });
 
     it("should have store as icon", () => {
-        let iconDebugElement: DebugElement = testHostFixture.debugElement.query(By.css('md-icon'));
+        let iconDebugElement: DebugElement = testHostFixture.debugElement.query(By.css("md-icon"));
         expect(iconDebugElement.nativeElement.textContent).toEqual("store");
     });
 
     it("should have same submission as host element", () => {
-        let listItemElement: DebugElement = testHostFixture.debugElement.query(By.css('feed-list-item'));
+        let listItemElement: DebugElement = testHostFixture.debugElement.query(By.css("feed-list-item"));
         expect(listItemElement.componentInstance.submission).toBe(expectedSubmission);
     });
 
     it("should trigger route by click", () => {
-        const spy = spyOn(router, 'navigate');
-        let listItemElement: DebugElement = testHostFixture.debugElement.query(By.css('md-list-item'));
+        const spy = spyOn(router, "navigate");
+        let listItemElement: DebugElement = testHostFixture.debugElement.query(By.css("md-list-item"));
         click(listItemElement);
         expect(spy.calls.count()).toEqual(1);
         //console.log(navArgs);
