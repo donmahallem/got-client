@@ -46,7 +46,7 @@ export class GotApiService {
         return this.request("/api/v1/user/me", options);
     }
 
-    getNewSubmissions(): Observable<RedditListingResponse<RedditSubmission>> {
+    public getNewSubmissions(): Observable<RedditListingResponse<RedditSubmission>> {
         return this.http.get(this.heroesUrl)
             .map(this.extractData)
             .catch(this.handleError);
