@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 import {
     ActivatedRoute,
     Router
@@ -8,8 +8,8 @@ import {
 } from "./../services"
 
 @Component({
-    templateUrl: './authorize.component.html',
-    styleUrls: ['./authorize.component.css']
+    templateUrl: "./authorize.component.html",
+    styleUrls: ["./authorize.component.css"]
 })
 export class AuthorizeComponent {
     constructor(private route: ActivatedRoute,

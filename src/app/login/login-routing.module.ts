@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
+import { NgModule } from "@angular/core";
 import {
     RouterModule,
     Routes,
     Data
-} from '@angular/router';
-import { BrowserModule } from '@angular/platform-browser';
+} from "@angular/router";
+import { BrowserModule } from "@angular/platform-browser";
 import { LoginComponent } from "./login.component";
 import { AuthorizeComponent } from "./authorize.component";
 import {
@@ -12,7 +12,7 @@ import {
     MdIcon,
     MdIconModule,
     MdListModule
-} from '@angular/material';
+} from "@angular/material";
 
 const rootRoutes: Routes = [
     {
