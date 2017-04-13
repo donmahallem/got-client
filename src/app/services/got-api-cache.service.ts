@@ -1,5 +1,5 @@
 
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import {
     Http,
     Response,
@@ -8,20 +8,20 @@ import {
     RequestOptionsArgs,
     Request,
     RequestMethod
-} from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
+} from "@angular/http";
+import { Observable } from "rxjs/Observable";
+import "rxjs/add/operator/catch";
+import "rxjs/add/operator/map";
 import {
     RedditSubmission,
     RedditSubmissions,
     RedditListingResponse,
     GotUser
-} from './../models/';
+} from "./../models/";
 import {
     GotAuthService
 } from "./got-auth.service";
-import Dexie from 'dexie';
+import Dexie from "dexie";
 class SubmissionDB extends Dexie {
     submissions: Dexie.Table<RedditSubmission, number>;
     constructor() {

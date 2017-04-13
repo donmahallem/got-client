@@ -1,6 +1,6 @@
 /// <reference path="./EventSource.d.ts"/>
 
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import {
     Http,
     Response,
@@ -9,22 +9,22 @@ import {
     RequestOptionsArgs,
     Request,
     RequestMethod
-} from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
+} from "@angular/http";
+import { Observable } from "rxjs/Observable";
+import "rxjs/add/operator/catch";
+import "rxjs/add/operator/map";
 import {
     RedditSubmission,
     RedditSubmissions,
     RedditListingResponse,
     GotUser
-} from './../models/';
+} from "./../models/";
 import {
     GotAuthService
 } from "./got-auth.service";
 import { Logger } from "./../util";
-import { Subject } from 'rxjs/Subject';
-import Dexie from 'dexie';
+import { Subject } from "rxjs/Subject";
+import Dexie from "dexie";
 import * as moment from "moment";
 
 class SubmissionDB extends Dexie {

@@ -1,7 +1,7 @@
 // TAKEN FROM https://github.com/angular/angular-es/blob/master/public/docs/_examples/testing/ts/testing/index.ts
 
-import { DebugElement } from '@angular/core';
-import { tick, ComponentFixture } from '@angular/core/testing';
+import { DebugElement } from "@angular/core";
+import { tick, ComponentFixture } from "@angular/core/testing";
 
 ///// Short utilities /////
 
@@ -15,10 +15,10 @@ export function advance(f: ComponentFixture<any>): void {
  * Create custom DOM event the old fashioned way
  *
  * https://developer.mozilla.org/en-US/docs/Web/API/Event/initEvent
- * Although officially deprecated, some browsers (phantom) don't accept the preferred "new Event(eventName)"
+ * Although officially deprecated, some browsers (phantom) don"t accept the preferred "new Event(eventName)"
  */
 export function newEvent(eventName: string, bubbles = false, cancelable = false) {
-    let evt = document.createEvent('CustomEvent');  // MUST be 'CustomEvent'
+    let evt = document.createEvent("CustomEvent");  // MUST be "CustomEvent"
     evt.initCustomEvent(eventName, bubbles, cancelable, null);
     return evt;
 }
@@ -36,6 +36,6 @@ export function click(el: DebugElement | HTMLElement, eventObj: any = ButtonClic
     if (el instanceof HTMLElement) {
         el.click();
     } else {
-        el.triggerEventHandler('click', eventObj);
+        el.triggerEventHandler("click", eventObj);
     }
 }
