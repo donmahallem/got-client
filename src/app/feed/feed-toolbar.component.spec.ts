@@ -33,8 +33,8 @@ import {
 import {
     FeedService
 } from "./feed.service";
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from "rxjs/Observable";
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
 
 
 const sidebarOpenSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);

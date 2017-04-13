@@ -1,14 +1,14 @@
 import {
     Component,
     OnDestroy
-} from '@angular/core';
+} from "@angular/core";
 import { FeedService } from "./feed.service";
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from "rxjs/Subscription";
 
 @Component({
     selector: "feed-toolbar",
-    templateUrl: './feed-toolbar.component.html',
-    styleUrls: ['./feed-toolbar.component.css']
+    templateUrl: "./feed-toolbar.component.html",
+    styleUrls: ["./feed-toolbar.component.css"]
 })
 export class FeedToolbarComponent implements OnDestroy {
     private sidebarSubscription: Subscription;

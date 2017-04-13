@@ -1,7 +1,7 @@
 import {
     Component,
     OnDestroy
-} from '@angular/core';
+} from "@angular/core";
 
 import {
     RedditSubmissions
@@ -11,14 +11,14 @@ import {
     GotLiveService
 } from "./../services/";
 import { FeedService } from "./feed.service";
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from "rxjs/Subscription";
 import { FeedFilter } from "./feed-filter.model";
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from "@angular/forms";
 
 @Component({
     selector: "feed-sidebar",
-    templateUrl: './feed-sidebar.component.html',
-    styleUrls: ['./feed-sidebar.component.css']
+    templateUrl: "./feed-sidebar.component.html",
+    styleUrls: ["./feed-sidebar.component.css"]
 })
 export class FeedSidebarComponent implements OnDestroy {
 
