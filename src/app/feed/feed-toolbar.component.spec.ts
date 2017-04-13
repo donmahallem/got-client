@@ -3,7 +3,8 @@ import {
     async,
     ComponentFixture,
     inject,
-    tick
+    tick,
+    fakeAsync
 } from "@angular/core/testing";
 import {
     DebugElement,
@@ -32,10 +33,17 @@ import {
 import {
     FeedService
 } from "./feed.service";
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+
+
+const sidebarOpenSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+
 class FeedServiceStub {
     public toggleSidebar(): void {
 
     }
+    public sidebarOpenObservable: Observable<boolean> = sidebarOpenSubject.asObservable();
 }
 describe("FeedToolbarComponent", () => {
     let componentFixture: ComponentFixture<FeedToolbarComponent>;
@@ -61,11 +69,25 @@ describe("FeedToolbarComponent", () => {
     }));
 
     describe("sidebar toggle button", () => {
+        let sidebarToggleDebugElement: DebugElement;
+        beforeEach(() => {
+            sidebarToggleDebugElement = componentFixture.debugElement.query(By.css("button.sidebarToggle"));
+        })
         it("should trigger sidebarToggle service function", () => {
-            let sidebarToggleDebugElement: DebugElement = componentFixture.debugElement.query(By.css("button.sidebarToggle"));
             let spy: jasmine.Spy = spyOn(feedService, "toggleSidebar");
             click(sidebarToggleDebugElement);
             expect(spy.calls.count()).toEqual(1);
         });
+        it("should switch symbol depending on state", fakeAsync(() => {
+            let icon: DebugElement = sidebarToggleDebugElement.query(By.css("md-icon"));
+            sidebarOpenSubject.next(true);
+            tick();
+            componentFixture.detectChanges();
+            expect(icon.nativeElement.textContent).toEqual("arrow_back");
+            sidebarOpenSubject.next(false);
+            componentFixture.detectChanges();
+            tick();
+            expect(icon.nativeElement.textContent).toEqual("menu");
+        }));
     });
 });
