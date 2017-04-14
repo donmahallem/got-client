@@ -55,4 +55,32 @@ describe("FeedService", () => {
             subscription.unsubscribe();
         })));
     });
+    describe("sidebarOpen getter", () => {
+        it("should get the values accordingly", fakeAsync(inject([FeedService], (feedService: FeedService) => {
+            feedService.sidebarOpen = true;
+            tick();
+            expect(feedService.sidebarOpen).toBeTruthy();
+            feedService.sidebarOpen = false;
+            tick();
+            expect(feedService.sidebarOpen).toBeFalsy();
+        })));
+    });
+    describe("sidebarOpen setter", () => {
+        it("should set the values accordingly", fakeAsync(inject([FeedService], (feedService: FeedService) => {
+            let spy: jasmine.Spy = jasmine.createSpy("open");
+            // set initial value
+            feedService.sidebarOpen = true;
+            tick();
+            let subscription: Subscription = feedService.sidebarOpenObservable.subscribe(spy);
+            feedService.sidebarOpen = false;
+            tick();
+            feedService.sidebarOpen = true;
+            tick();
+            expect(spy.calls.argsFor(0)[0]).toEqual(true);
+            expect(spy.calls.argsFor(1)[0]).toEqual(false);
+            expect(spy.calls.argsFor(2)[0]).toEqual(true);
+            expect(spy.calls.count()).toEqual(3);
+            subscription.unsubscribe();
+        })));
+    });
 });
