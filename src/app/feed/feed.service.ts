@@ -9,6 +9,9 @@ export class FeedService {
     // Observable string streams
     sidebarOpenObservable = this.openSidebarSource.asObservable();
     feedFilterObservable = this.feedFilterSource.asObservable();
+    constructor() {
+
+    }
     // Service message commands
     public set sidebarOpen(open: boolean) {
         this.openSidebarSource.next(open);
