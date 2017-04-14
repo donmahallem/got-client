@@ -4,7 +4,7 @@ import {
     OnChanges,
     Input,
     SimpleChanges
-} from '@angular/core';
+} from "@angular/core";
 import {
     Router
 } from "@angular/router"
@@ -20,8 +20,8 @@ import {
 
 @Component({
     selector: "feed-list-item",
-    templateUrl: './feed-list-item.component.html',
-    styleUrls: ['./feed-list-item.component.css']
+    templateUrl: "./feed-list-item.component.html",
+    styleUrls: ["./feed-list-item.component.css"]
 })
 export class FeedListItemComponent implements OnDestroy, OnChanges {
 
@@ -49,6 +49,6 @@ export class FeedListItemComponent implements OnDestroy, OnChanges {
     }
 
     public click() {
-        this.router.navigate(['/feed/submission', this.submission.id]);
+        this.router.navigate(["/feed/submission", this.submission.id]);
     }
 }

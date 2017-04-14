@@ -4,7 +4,7 @@ import {
     ComponentFixture,
     inject,
     tick
-} from '@angular/core/testing';
+} from "@angular/core/testing";
 import {
     DebugElement,
     Component,
@@ -12,21 +12,21 @@ import {
     Directive,
     ViewChild,
     ViewContainerRef
-} from '@angular/core';
+} from "@angular/core";
 import {
     CommonModule
-} from '@angular/common';
+} from "@angular/common";
 import {
     MdIcon,
     MdListItem
-} from '@angular/material';
+} from "@angular/material";
 import {
     By
-} from '@angular/platform-browser';
+} from "@angular/platform-browser";
 import {
     SubmissionDialogComponent,
     SnuDownPipe
-} from './submission-dialog.component';
+} from "./submission-dialog.component";
 import {
     GotAuthService
 } from "./../services";
@@ -34,10 +34,10 @@ import {
     MaterialModule,
     MdDialog,
     MdDialogRef
-} from '@angular/material';
+} from "@angular/material";
 import {
     RouterTestingModule
-} from '@angular/router/testing';
+} from "@angular/router/testing";
 import {
     GotApiService
 } from "./../services/"
@@ -54,7 +54,7 @@ import {
 import {
     BrowserAnimationsModule
 } from "@angular/platform-browser/animations";
-import { Observable } from 'rxjs/Observable';
+import { Observable } from "rxjs/Observable";
 
 class GotApiServiceStub {
     public upvote(item: string | RedditSubmission): Observable<boolean> {
@@ -62,7 +62,7 @@ class GotApiServiceStub {
     }
 }
 
-@Directive({ selector: 'dir-with-view-container' })
+@Directive({ selector: "dir-with-view-container" })
 class DirectiveWithViewContainer {
     constructor(public viewContainerRef: ViewContainerRef) { }
 }
@@ -112,7 +112,7 @@ const expectedSubmission: RedditSubmission = {
     url: "https://www.reddit.com/url/abc",
     author: "redditUser"
 }
-describe('SubmissionDialogComponent', () => {
+describe("SubmissionDialogComponent", () => {
     let componentFixture: ComponentFixture<SubmissionDialogComponent>;
     let router: Router;
     let dialog: MdDialog;
@@ -151,7 +151,7 @@ describe('SubmissionDialogComponent', () => {
     });
 
 
-    it('should open a dialog with SubmissionDialogComponent as component', () => {
+    it("should open a dialog with SubmissionDialogComponent as component", () => {
         expect(dialogRef.componentInstance).toEqual(jasmine.any(SubmissionDialogComponent));
         expect(dialogRef.componentInstance.dialogRef).toBe(dialogRef);
     });

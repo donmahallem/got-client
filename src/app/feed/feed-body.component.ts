@@ -1,13 +1,13 @@
 import {
     Component,
     OnDestroy
-} from '@angular/core';
+} from "@angular/core";
 import { FeedService } from "./feed.service";
 import { GotApiService } from "./../services/";
 @Component({
     selector: "feed-body",
-    templateUrl: './feed-body.component.html',
-    styleUrls: ['./feed-body.component.css']
+    templateUrl: "./feed-body.component.html",
+    styleUrls: ["./feed-body.component.css"]
 })
 export class FeedBodyComponent implements OnDestroy {
     sidebarOpen: boolean;

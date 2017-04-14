@@ -1,7 +1,7 @@
 import {
     Component,
     OnDestroy
-} from '@angular/core';
+} from "@angular/core";
 
 import {
     RedditSubmissions
@@ -11,7 +11,7 @@ import {
     GotLiveService,
     GotApiCacheService
 } from "./../services/";
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from "rxjs/Subscription";
 import { FeedFilter } from "./feed-filter.model";
 import { FeedService } from "./feed.service";
 import {
@@ -21,13 +21,13 @@ import {
 import {
     MdDialog,
     MdDialogRef
-} from '@angular/material';
+} from "@angular/material";
 import { SubmissionDialogComponent } from "./submission-dialog.component";
 
 @Component({
     selector: "feed-list",
-    templateUrl: './feed-list.component.html',
-    styleUrls: ['./feed-list.component.css']
+    templateUrl: "./feed-list.component.html",
+    styleUrls: ["./feed-list.component.css"]
 })
 export class FeedListComponent implements OnDestroy {
 

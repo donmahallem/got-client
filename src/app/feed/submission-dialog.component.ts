@@ -2,14 +2,14 @@ import {
     Component,
     Pipe,
     PipeTransform
-} from '@angular/core';
+} from "@angular/core";
 import {
     RedditSubmission,
     VoteState
 } from "./../models/"
 import {
     MdDialogRef
-} from '@angular/material';
+} from "@angular/material";
 /// <reference path="snudown-js.d.ts" />
 import * as snudown from "snudown-js";
 import { GotApiService } from "./../services/got-api.service";
@@ -19,7 +19,7 @@ import {
 } from "./../util/";
 
 
-@Pipe({ name: 'snudown' })
+@Pipe({ name: "snudown" })
 export class SnuDownPipe implements PipeTransform {
     transform(value: string): string {
         return snudown.markdown(value);
@@ -27,7 +27,7 @@ export class SnuDownPipe implements PipeTransform {
 }
 
 @Component({
-    templateUrl: './submission-dialog.component.html',
+    templateUrl: "./submission-dialog.component.html",
     styleUrls: ["submission-dialog.component.css"]
 })
 export class SubmissionDialogComponent {
@@ -48,7 +48,7 @@ export class SubmissionDialogComponent {
     }
 
     public openInNewTab(url: string): void {
-        let win = window.open(url, '_blank');
+        let win = window.open(url, "_blank");
         win.focus();
     }
 

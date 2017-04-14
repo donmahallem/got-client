@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
+import { NgModule } from "@angular/core";
 import {
     RouterModule,
     Routes,
     Data
-} from '@angular/router';
-import { BrowserModule } from '@angular/platform-browser';
+} from "@angular/router";
+import { BrowserModule } from "@angular/platform-browser";
 import { FeedComponent } from "./feed.component";
 import { SubmissionDialogComponent } from "./submission-dialog.component";
 
