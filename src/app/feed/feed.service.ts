@@ -17,7 +17,7 @@ export class FeedService {
         this.openSidebarSource.next(open);
     }
 
-    public toggleSidebar() {
+    public toggleSidebar(): void {
         this.openSidebarSource.next(!this.openSidebarSource.value);
     }
 
