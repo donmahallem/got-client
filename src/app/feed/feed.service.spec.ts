@@ -11,6 +11,9 @@ import {
 import {
     Subscription
 } from "rxjs/subscription";
+import {
+    FeedFilter
+} from "./feed-filter.model";
 
 describe("FeedService", () => {
     let feedService: FeedService;
@@ -55,7 +58,7 @@ describe("FeedService", () => {
             subscription.unsubscribe();
         })));
     });
-    describe("sidebarOpen getter", () => {
+    describe("sidebarOpen", () => {
         it("should get the values accordingly", fakeAsync(inject([FeedService], (feedService: FeedService) => {
             feedService.sidebarOpen = true;
             tick();
@@ -65,21 +68,26 @@ describe("FeedService", () => {
             expect(feedService.sidebarOpen).toBeFalsy();
         })));
     });
-    describe("sidebarOpen setter", () => {
-        it("should set the values accordingly", fakeAsync(inject([FeedService], (feedService: FeedService) => {
+    describe("feedFilter", () => {
+        let testObj: FeedFilter;
+        beforeAll(() => {
+            testObj = new FeedFilter();
+            testObj.pricecheck = false;
+            testObj.psa = false;
+            feedService.feedFilter = testObj;
+        })
+        it("should set the value of the getter", fakeAsync(inject([FeedService], (feedService: FeedService) => {
+            feedService.feedFilter = testObj;
+            tick();
+            expect(feedService.feedFilter).toEqual(jasmine.objectContaining(testObj));
+        })));
+        it("should trigger the observable", fakeAsync(inject([FeedService], (feedService: FeedService) => {
             let spy: jasmine.Spy = jasmine.createSpy("open");
-            // set initial value
-            feedService.sidebarOpen = true;
+            let subscription: Subscription = feedService.feedFilterObservable.subscribe(spy);
+            feedService.feedFilter = testObj;
             tick();
-            let subscription: Subscription = feedService.sidebarOpenObservable.subscribe(spy);
-            feedService.sidebarOpen = false;
-            tick();
-            feedService.sidebarOpen = true;
-            tick();
-            expect(spy.calls.argsFor(0)[0]).toEqual(true);
-            expect(spy.calls.argsFor(1)[0]).toEqual(false);
-            expect(spy.calls.argsFor(2)[0]).toEqual(true);
-            expect(spy.calls.count()).toEqual(3);
+            expect(spy.calls.argsFor(1)[0]).toEqual(jasmine.objectContaining(testObj));
+            expect(spy.calls.count()).toEqual(2);
             subscription.unsubscribe();
         })));
     });
