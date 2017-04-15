@@ -1,0 +1,13 @@
+<div class="inputBox" *ngIf="opened" [@openState]="opened?'open':'closed'">
+    <md-input-container floatPlaceholder="never">
+        <input mdInput placeholder="Search" [mdAutocomplete]="auto" [formControl]="stateCtrl">
+    </md-input-container>
+    <md-autocomplete #auto="mdAutocomplete">
+        <md-option *ngFor="let state of filteredStates | async" [value]="state">
+            {{ state }}
+        </md-option>
+    </md-autocomplete>
+</div>
+<button md-icon-button class="btnSearch" (click)="openSearch()">
+    <md-icon>search</md-icon>
+</button>

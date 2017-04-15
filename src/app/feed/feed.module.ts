@@ -10,6 +10,7 @@ import { FeedBodyComponent } from "./feed-body.component";
 import { FeedListComponent } from "./feed-list.component";
 import { FeedListItemComponent } from "./feed-list-item.component";
 import { FeedToolbarComponent } from "./feed-toolbar.component";
+import { FeedToolbarSearchComponent } from "./feed-toolbar-search.component";
 import { FeedSidebarComponent } from "./feed-sidebar.component";
 import { RedditApiService } from "./../services/reddit-api.service";
 import { GotApiService } from "./../services/got-api.service";
@@ -34,7 +35,8 @@ import {
         SubmissionDialogComponent,
         SnuDownPipe,
         FeedSidebarComponent,
-        MomentFromNowPipe
+        MomentFromNowPipe,
+        FeedToolbarSearchComponent
     ],
     imports: [
         CommonModule,

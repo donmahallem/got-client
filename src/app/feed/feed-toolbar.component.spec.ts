@@ -21,6 +21,9 @@ import {
     FeedToolbarComponent
 } from "./feed-toolbar.component";
 import {
+    FeedToolbarSearchComponent
+} from "./feed-toolbar-search.component";
+import {
     BrowserDynamicTestingModule
 } from "@angular/platform-browser-dynamic/testing";
 
@@ -51,7 +54,8 @@ describe("FeedToolbarComponent", () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
-                FeedToolbarComponent
+                FeedToolbarComponent,
+                FeedToolbarSearchComponent
             ], imports: [
                 MaterialModule
             ],
