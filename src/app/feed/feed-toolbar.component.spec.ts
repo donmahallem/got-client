@@ -60,10 +60,7 @@ describe("FeedToolbarComponent", () => {
         TestBed.configureTestingModule({
             declarations: [
                 FeedToolbarComponent,
-                {
-                    provide: FeedToolbarSearchComponent,
-                    useClass: FeedToolbarSearchComponentStub
-                }
+                FeedToolbarSearchComponentStub
             ], imports: [
                 MaterialModule
             ],
