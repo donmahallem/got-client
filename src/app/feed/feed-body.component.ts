@@ -3,7 +3,7 @@ import {
     OnDestroy
 } from "@angular/core";
 import { FeedService } from "./feed.service";
-import { GotApiService } from "./../services/";
+import { Subscription } from "rxjs/Subscription";
 @Component({
     selector: "feed-body",
     templateUrl: "./feed-body.component.html",
@@ -11,18 +11,16 @@ import { GotApiService } from "./../services/";
 })
 export class FeedBodyComponent implements OnDestroy {
     sidebarOpen: boolean;
-    constructor(private feedService: FeedService,
-        private apiService: GotApiService) {
 
-        this.feedService.sidebarOpenObservable.subscribe(
+    private sidebarOpenSubscription: Subscription;
+    constructor(private feedService: FeedService) {
+        this.sidebarOpenSubscription = this.feedService.sidebarOpenObservable.subscribe(
             open => {
                 this.sidebarOpen = open;
             });
-        this.apiService.getMe().subscribe(me => {
-            console.log("ME", JSON.stringify(me));
-        });
     }
 
     public ngOnDestroy() {
+        this.sidebarOpenSubscription.unsubscribe();
     }
 }

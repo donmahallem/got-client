@@ -44,8 +44,4 @@ export class FeedSidebarComponent implements OnDestroy {
     public ngOnDestroy() {
         //this.filterSubscription.unsubscribe();
     }
-
-    public tt(value) {
-        console.log(value);
-    }
 }
