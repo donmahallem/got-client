@@ -5,10 +5,10 @@ export class SearchUtil {
      * @param search the search term
      */
     public static sanitize(search: string): string {
-        //remove double whitespace characters of any kind
-        let san: string = search.replace(/\s+/g, " ");
         //replace all line breaks
-        san = san.replace(/(\r?\n|\r)+/g, "");
+        let san: string = search.replace(/(\n|\r)+/g, "");
+        //remove double whitespace characters of any kind
+        san = san.replace(/\s+/g, " ");
         return san;
     }
 }
