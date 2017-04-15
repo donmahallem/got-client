@@ -1,4 +1,7 @@
-import { Component } from "@angular/core";
+import {
+    Component,
+    OnDestroy
+} from "@angular/core";
 import { FormControl } from "@angular/forms";
 import {
     trigger,
@@ -8,6 +11,8 @@ import {
     transition
 } from "@angular/animations";
 import "rxjs/add/operator/startWith";
+import { Subscription } from "rxjs/Subscription";
+import { Observable } from "rxjs/Observable";
 
 @Component({
     selector: "feed-toolbar-search",
@@ -27,68 +32,24 @@ import "rxjs/add/operator/startWith";
         ])
     ]
 })
-export class FeedToolbarSearchComponent {
+export class FeedToolbarSearchComponent implements OnDestroy {
     stateCtrl: FormControl;
-    filteredStates: any;
 
     states = [
         "Alabama",
         "Alaska",
-        "Arizona",
-        "Arkansas",
-        "California",
-        "Colorado",
-        "Connecticut",
-        "Delaware",
-        "Florida",
-        "Georgia",
-        "Hawaii",
-        "Idaho",
-        "Illinois",
-        "Indiana",
-        "Iowa",
-        "Kansas",
-        "Kentucky",
-        "Louisiana",
-        "Maine",
-        "Maryland",
-        "Massachusetts",
-        "Michigan",
-        "Minnesota",
-        "Mississippi",
-        "Missouri",
-        "Montana",
-        "Nebraska",
-        "Nevada",
-        "New Hampshire",
-        "New Jersey",
-        "New Mexico",
-        "New York",
-        "North Carolina",
-        "North Dakota",
-        "Ohio",
-        "Oklahoma",
-        "Oregon",
-        "Pennsylvania",
-        "Rhode Island",
-        "South Carolina",
-        "South Dakota",
-        "Tennessee",
-        "Texas",
-        "Utah",
-        "Vermont",
-        "Virginia",
-        "Washington",
-        "West Virginia",
-        "Wisconsin",
-        "Wyoming",
     ];
+    private inputSubscription: Subscription;
     private opened: boolean = false;
     constructor() {
         this.stateCtrl = new FormControl();
-        this.filteredStates = this.stateCtrl.valueChanges
-            .startWith(null)
-            .map(name => this.filterStates(name));
+        this.inputSubscription = this.stateCtrl.valueChanges.skipUntil(Observable.timer(200)).subscribe(value => {
+            console.log(value);
+        });
+    }
+
+    public ngOnDestroy() {
+        this.inputSubscription.unsubscribe();
     }
 
     filterStates(val: string) {

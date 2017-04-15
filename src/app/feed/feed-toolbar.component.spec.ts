@@ -26,7 +26,6 @@ import {
 import {
     BrowserDynamicTestingModule
 } from "@angular/platform-browser-dynamic/testing";
-
 import {
     MaterialModule
 } from "@angular/material";
@@ -42,6 +41,12 @@ import { BehaviorSubject } from "rxjs/BehaviorSubject";
 
 const sidebarOpenSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
+@Component({
+    selector: "feed-toolbar-search",
+    template: "<p>test</p>"
+})
+class FeedToolbarSearchComponentStub {
+}
 class FeedServiceStub {
     public toggleSidebar(): void {
 
@@ -55,7 +60,10 @@ describe("FeedToolbarComponent", () => {
         TestBed.configureTestingModule({
             declarations: [
                 FeedToolbarComponent,
-                FeedToolbarSearchComponent
+                {
+                    provide: FeedToolbarSearchComponent,
+                    useClass: FeedToolbarSearchComponentStub
+                }
             ], imports: [
                 MaterialModule
             ],
