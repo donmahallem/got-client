@@ -8,7 +8,7 @@ export class SearchUtil {
         //remove double whitespace characters of any kind
         let san: string = search.replace(/\s+/g, " ");
         //replace all line breaks
-        san = san.replace(/\r?\n|\r/g, "");
+        san = san.replace(/(\r?\n|\r)+/g, "");
         return san;
     }
 }
