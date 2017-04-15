@@ -46,7 +46,7 @@ export class FeedToolbarSearchComponent implements OnDestroy {
     }
 
     public search(): void {
-        if (this.stateCtrl.value !== "") {
+        if (this.stateCtrl.value !== "" && this.stateCtrl.value) {
             this.router.navigate(["feed", "search"], {
                 queryParams: {
                     q: SearchUtil.sanitize(this.stateCtrl.value)
