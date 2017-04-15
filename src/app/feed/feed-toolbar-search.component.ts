@@ -3,6 +3,7 @@ import {
     OnDestroy
 } from "@angular/core";
 import { FormControl } from "@angular/forms";
+import { Router } from "@angular/router";
 import {
     trigger,
     state,
@@ -13,35 +14,22 @@ import {
 import "rxjs/add/operator/startWith";
 import { Subscription } from "rxjs/Subscription";
 import { Observable } from "rxjs/Observable";
+import { SearchUtil } from "./../util/";
 
 @Component({
     selector: "feed-toolbar-search",
     templateUrl: "./feed-toolbar-search.component.html",
-    styleUrls: ["./feed-toolbar-search.component.css"],
-    animations: [
-        trigger("openState", [
-            state("open", style({ width: '*' })),
-            transition("void => *", [
-                style({ width: 0 }),
-                animate(250, style({ width: "*" }))
-            ]),
-            transition("* => void", [
-                style({ width: '*' }),
-                animate(250, style({ width: 0 }))
-            ])
-        ])
-    ]
+    styleUrls: ["./feed-toolbar-search.component.css"]
 })
 export class FeedToolbarSearchComponent implements OnDestroy {
-    stateCtrl: FormControl;
+    public stateCtrl: FormControl;
 
     states = [
         "Alabama",
         "Alaska",
     ];
     private inputSubscription: Subscription;
-    private opened: boolean = false;
-    constructor() {
+    constructor(private router: Router) {
         this.stateCtrl = new FormControl();
         this.inputSubscription = this.stateCtrl.valueChanges.skipUntil(Observable.timer(200)).subscribe(value => {
             console.log(value);
@@ -57,8 +45,14 @@ export class FeedToolbarSearchComponent implements OnDestroy {
             : this.states;
     }
 
-    public openSearch(): void {
-        this.opened = true;
+    public search(): void {
+        if (this.stateCtrl.value !== "") {
+            this.router.navigate(["feed", "search"], {
+                queryParams: {
+                    q: SearchUtil.sanitize(this.stateCtrl.value)
+                }
+            });
+        }
     }
 
 }
