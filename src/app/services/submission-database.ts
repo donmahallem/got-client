@@ -9,9 +9,8 @@ import { XmlEntities } from "html-entities";
 export class SubmissionDatabase extends Dexie {
     public submissions: Dexie.Table<RedditSubmission, string>;
     constructor() {
-        super("SubmissionDB");
-        this.version(1).stores({ submissions: "id,created_utc,author" });
-        this.version(2).stores({ submissions: "id,created_utc,author,*searchWords" });
+        super("SubmissionDB2");
+        this.version(1).stores({ submissions: "id,created_utc,author,title,type,*searchWords" });
         // Add hooks that will index "message" for full-text search:
         this.submissions.hook("creating", this.createHook.bind(this));
         this.submissions.hook("updating", this.updateHook.bind(this));
@@ -19,12 +18,14 @@ export class SubmissionDatabase extends Dexie {
 
     private createHook(primKey: any, obj: any, trans: any): void {
         obj.searchWords = this.indexSubmission(obj);
+        obj.type = RedditSubmission.parseType(obj);
     }
 
     private updateHook(mods: any, primKey: any, obj: any, trans: any) {
         if (mods.hasOwnProperty("selftext_html") || mods.hasOwnProperty("title")) {
             return {
-                searchWords: this.indexSubmission(obj, mods)
+                searchWords: this.indexSubmission(obj, mods),
+                type: RedditSubmission.parseType(obj)
             };
         }
     }

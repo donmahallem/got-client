@@ -6,12 +6,22 @@ import {
 } from "@angular/router";
 import { BrowserModule } from "@angular/platform-browser";
 import { FeedComponent } from "./feed.component";
-import { SubmissionDialogComponent } from "./submission-dialog.component";
+import { FeedListComponent } from "./feed-list.component";
 
 const rootRoutes: Routes = [
     {
-        path: "**",
-        component: FeedComponent
+        path: "",
+        component: FeedComponent,
+        children: [
+            {
+                path: "submission",
+                loadChildren: "app/feed/submission/submission.module#SubmissionModule"
+            },
+            {
+                path: "",
+                component: FeedListComponent
+            }
+        ]
     }
 ];
 

@@ -5,13 +5,15 @@ import { HttpModule } from "@angular/http";
 import { CommonModule } from "@angular/common";
 
 import { FeedRoutingModule } from "./feed-routing.module";
-import { FeedComponent } from "./feed.component";
-import { FeedBodyComponent } from "./feed-body.component";
-import { FeedListComponent } from "./feed-list.component";
-import { FeedListItemComponent } from "./feed-list-item.component";
-import { FeedToolbarComponent } from "./feed-toolbar.component";
-import { FeedToolbarSearchComponent } from "./feed-toolbar-search.component";
-import { FeedSidebarComponent } from "./feed-sidebar.component";
+import {
+    FeedSidebarComponent,
+    FeedComponent,
+    FeedToolbarComponent,
+    FeedBodyComponent,
+    FeedListComponent,
+    FeedListItemComponent,
+    FeedToolbarSearchComponent
+} from "./components";
 import { RedditApiService } from "./../services/reddit-api.service";
 import { GotApiService } from "./../services/got-api.service";
 import {
