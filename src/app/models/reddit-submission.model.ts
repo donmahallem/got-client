@@ -6,6 +6,7 @@ export interface RedditSubmission {
     author?: string;
     link_flair_text?: string;
     selftext?: string;
+    selftext_html?: string;
     url?: string;
 }
 export type RedditSubmissions = RedditSubmission[]; 

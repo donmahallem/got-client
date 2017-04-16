@@ -24,10 +24,51 @@ import {
 } from "./got-auth.service";
 import { Logger } from "./../util";
 import { Subject } from "rxjs/Subject";
-import * as moment from "moment";
-import { SubmissionDatabase } from "./submission-database";
 import Dexie from "dexie";
+import * as moment from "moment";
+import * as html2text from "html-to-text";
 
+class SubmissionDB extends Dexie {
+    public submissions: Dexie.Table<RedditSubmission, string>;
+    constructor() {
+        super("SubmissionDB");
+        this.version(1).stores({ submissions: "id,created_utc,author,*searchWords" });
+        // Add hooks that will index "message" for full-text search:
+        this.submissions.hook("creating", this.createHook.bind(this));
+        this.submissions.hook("updating", this.updateHook.bind(this));
+    }
+
+    private createHook(primKey: any, obj: any, trans: any): void {
+        if (typeof obj.message === 'string') obj.searchWords = this.clearInput(obj.content_html);
+    }
+    private updateHook(mods: any, primKey: any, obj: any, trans: any) {
+        if (mods.hasOwnProperty("content_html")) {
+            // "message" property is being updated
+            if (typeof mods.content_html == 'string')
+                // "message" property was updated to another valid value. Re-index messageWords:
+                return { searchWords: this.clearInput(mods.content_html) };
+            else
+                // "message" property was deleted (typeof mods.message === 'undefined') or changed to an unknown type. Remove indexes:
+                return { searchWords: [] };
+        }
+    }
+
+    public clearInput(input: string): string[] {
+        let text: string = htmlToText.fromString(input);
+        text = text.replace(/\s+/g, " ");
+        let splitted = text.split(" ");
+        // remove duplicates
+        let seen: { [key: string]: boolean; } = {};
+        let result: string[] = [];
+        for (let i = 0; i < splitted.length; i++) {
+            if (!seen.hasOwnProperty(splitted[i])) {
+                seen[splitted[i]] = true;
+                result.push(splitted[i]);
+            }
+        }
+        return result;
+    }
+}
 
 @Injectable()
 export class GotLiveService {
@@ -39,10 +80,10 @@ export class GotLiveService {
     private submissionsUpdatedSource = new Subject<string[]>();
     public readonly submissionsUpdated = this.submissionsUpdatedSource.asObservable();
 
-    private _db: SubmissionDatabase;
+    private _db: SubmissionDB;
     private eventSource: EventSource;
     constructor() {
-        this._db = new SubmissionDatabase();
+        this._db = new SubmissionDB();
         this.eventSource = new EventSource("https://got.xants.de/api/v1/reddit/live");
         this.eventSource.addEventListener("submission", submission => {
             const sub = JSON.parse(submission.data);
