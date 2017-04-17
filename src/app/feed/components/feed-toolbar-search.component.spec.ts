@@ -28,11 +28,11 @@ import {
 } from "@angular/platform-browser/animations";
 import {
     click
-} from "./../../testing/";
+} from "./../../../testing/";
 import { ReactiveFormsModule } from "@angular/forms";
 import { Observable } from "rxjs/Observable";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
-import { SearchUtil } from "./../util/";
+import { SearchUtil } from "./../../util/";
 
 class RouterStub {
     public navigate = jasmine.createSpy("navigate", (url: any[], args: any) => {

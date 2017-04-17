@@ -31,10 +31,10 @@ import {
 } from "@angular/material";
 import {
     click
-} from "./../../testing/";
+} from "./../../../testing/";
 import {
     FeedService
-} from "./feed.service";
+} from "./../feed.service";
 import { Observable } from "rxjs/Observable";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 

@@ -20,10 +20,6 @@ import {
     MomentFromNowPipe
 } from "./../util/";
 import {
-    SubmissionDialogComponent,
-    SnuDownPipe
-} from "./submission-dialog.component";
-import {
     MaterialModule
 } from "@angular/material";
 
@@ -34,8 +30,6 @@ import {
         FeedBodyComponent,
         FeedListComponent,
         FeedListItemComponent,
-        SubmissionDialogComponent,
-        SnuDownPipe,
         FeedSidebarComponent,
         MomentFromNowPipe,
         FeedToolbarSearchComponent
@@ -48,7 +42,6 @@ import {
         FeedRoutingModule
     ],
     entryComponents: [
-        SubmissionDialogComponent
     ],
     providers: [
         RedditApiService,

@@ -2,7 +2,7 @@ import {
     Component,
     OnDestroy
 } from "@angular/core";
-import { FeedService } from "./feed.service";
+import { FeedService } from "./../feed.service";
 import { Subscription } from "rxjs/Subscription";
 
 @Component({

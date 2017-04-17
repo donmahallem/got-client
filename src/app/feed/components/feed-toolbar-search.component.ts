@@ -14,7 +14,7 @@ import {
 import "rxjs/add/operator/startWith";
 import { Subscription } from "rxjs/Subscription";
 import { Observable } from "rxjs/Observable";
-import { SearchUtil } from "./../util/";
+import { SearchUtil } from "./../../util/";
 
 @Component({
     selector: "feed-toolbar-search",

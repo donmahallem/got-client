@@ -5,12 +5,12 @@ import {
 
 import {
     RedditSubmissions
-} from "./../models/"
-import { RedditApiService } from "./../services/reddit-api.service";
+} from "./../../models/"
+import { RedditApiService } from "./../../services/reddit-api.service";
 import {
     GotLiveService
-} from "./../services/";
-import { FeedService } from "./feed.service";
+} from "./../../services/";
+import { FeedService } from "./../feed.service";
 import { Subscription } from "rxjs/Subscription";
 import { FeedFilter } from "./feed-filter.model";
 import { FormControl, FormGroup } from "@angular/forms";

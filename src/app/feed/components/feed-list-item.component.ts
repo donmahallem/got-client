@@ -10,10 +10,10 @@ import {
 } from "@angular/router"
 import {
     RedditSubmission
-} from "./../models/"
+} from "./../../models/"
 import {
     Logger
-} from "./../util/logger";
+} from "./../../util/logger";
 import {
     SubmissionDialogComponent
 } from "./submission-dialog.component";

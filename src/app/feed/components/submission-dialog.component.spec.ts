@@ -28,9 +28,6 @@ import {
     SnuDownPipe
 } from "./submission-dialog.component";
 import {
-    GotAuthService
-} from "./../services";
-import {
     MaterialModule,
     MdDialog,
     MdDialogRef
@@ -39,15 +36,16 @@ import {
     RouterTestingModule
 } from "@angular/router/testing";
 import {
-    GotApiService
-} from "./../services/"
+    GotApiService,
+    GotAuthService
+} from "./../../services/"
 import {
     RedditSubmission,
     VoteState
-} from "./../models";
+} from "./../../models";
 import {
     click
-} from "./../../testing/";
+} from "./../../../testing/";
 import {
     Router
 } from "@angular/router";

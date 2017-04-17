@@ -5,15 +5,15 @@ import {
 
 import {
     RedditSubmissions
-} from "./../models/"
-import { RedditApiService } from "./../services/reddit-api.service";
+} from "./../../models/"
+import { RedditApiService } from "./../../services/reddit-api.service";
 import {
     GotLiveService,
     GotApiCacheService
-} from "./../services/";
+} from "./../../services/";
 import { Subscription } from "rxjs/Subscription";
 import { FeedFilter } from "./feed-filter.model";
-import { FeedService } from "./feed.service";
+import { FeedService } from "./../feed.service";
 import {
     Router,
     ActivatedRoute

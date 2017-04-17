@@ -6,17 +6,17 @@ import {
 import {
     RedditSubmission,
     VoteState
-} from "./../models/"
+} from "./../../models/"
 import {
     MdDialogRef
 } from "@angular/material";
 /// <reference path="snudown-js.d.ts" />
 import * as snudown from "snudown-js";
-import { GotApiService } from "./../services/got-api.service";
+import { GotApiService } from "./../../services/got-api.service";
 
 import {
     Logger
-} from "./../util/";
+} from "./../../util/";
 
 
 @Pipe({ name: "snudown" })

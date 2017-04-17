@@ -5,8 +5,10 @@ import {
     Data
 } from "@angular/router";
 import { BrowserModule } from "@angular/platform-browser";
-import { FeedComponent } from "./feed.component";
-import { FeedListComponent } from "./feed-list.component";
+import {
+    FeedListComponent,
+    FeedComponent
+} from "./components/";
 
 const rootRoutes: Routes = [
     {

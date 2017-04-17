@@ -21,10 +21,10 @@ import {
 } from "./feed-list-item.component";
 import {
     GotAuthService
-} from "./../services";
+} from "./../../services";
 import {
     MomentFromNowPipe
-} from "./../util/moment-from-now.pipe"
+} from "./../../util/moment-from-now.pipe"
 import {
     BrowserDynamicTestingModule
 } from "@angular/platform-browser-dynamic/testing";
@@ -37,10 +37,10 @@ import {
 } from "@angular/router/testing";
 import {
     RedditSubmission
-} from "./../models/reddit-submission.model";
+} from "./../../models/reddit-submission.model";
 import {
     click
-} from "./../../testing/";
+} from "./../../../testing/";
 import {
     Router
 } from "@angular/router";
