@@ -14,9 +14,6 @@ import {
 import {
     Logger
 } from "./../../util/logger";
-import {
-    SubmissionDialogComponent
-} from "./submission-dialog.component";
 
 @Component({
     selector: "feed-list-item",
