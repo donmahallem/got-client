@@ -32,10 +32,10 @@ import {
 } from "@angular/router/testing";
 import {
     click
-} from "./../../testing/";
+} from "./../../../testing/";
 import {
     FeedService
-} from "./feed.service";
+} from "./../feed.service";
 import { Observable } from "rxjs/Observable";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Subscription } from "rxjs/Subscription";
@@ -67,6 +67,7 @@ describe("FeedBodyComponent", () => {
                 FeedSidebarDummy,
                 FeedListDummy
             ], imports: [
+                RouterTestingModule,
                 MaterialModule
             ],
             providers: [

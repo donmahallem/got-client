@@ -31,7 +31,7 @@ export class FeedToolbarSearchComponent implements OnDestroy {
     private inputSubscription: Subscription;
     constructor(private router: Router) {
         this.stateCtrl = new FormControl();
-        this.inputSubscription = this.stateCtrl.valueChanges.skipUntil(Observable.timer(200)).subscribe(value => {
+        this.inputSubscription = this.stateCtrl.valueChanges.subscribe(value => {
             console.log(value);
         });
     }

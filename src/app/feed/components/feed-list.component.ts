@@ -23,7 +23,6 @@ import {
     MdDialog,
     MdDialogRef
 } from "@angular/material";
-import { SubmissionDialogComponent } from "./submission-dialog.component";
 
 @Component({
     selector: "feed-list",
@@ -44,8 +43,7 @@ export class FeedListComponent implements OnDestroy, OnInit {
         private feedService: FeedService,
         private gotApiCache: GotApiCacheService,
         private router: Router,
-        private dialog: MdDialog,
-        private activatedRoute: ActivatedRoute) {
+        private dialog: MdDialog, ) {
     }
 
     public ngOnInit(): void {
@@ -63,17 +61,6 @@ export class FeedListComponent implements OnDestroy, OnInit {
                 this.submissionsCache = subs;
                 this.updateList();
             });
-        this.urlSubscription = this.activatedRoute.url.subscribe(vals => {
-            if (vals.length === 2 && vals[0].path === "submission") {
-                this.gotLive.getSubmission(vals[1].path)
-                    .then(sub => {
-                        let dialogRef = this.dialog.open(SubmissionDialogComponent, { data: sub });
-                        dialogRef.afterClosed().subscribe(result => {
-                            this.router.navigate(["/feed"]);
-                        });
-                    })
-            }
-        });
     }
 
     private updateList() {
