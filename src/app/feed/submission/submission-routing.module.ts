@@ -7,6 +7,9 @@ import {
 import {
     SubmissionComponent, SubmissionBodyComponent
 } from "./components";
+import {
+    SubmissionResolver
+} from "./submission.resolver";
 
 const rootRoutes: Routes = [
     {
@@ -15,6 +18,9 @@ const rootRoutes: Routes = [
             {
                 path: ":id",
                 component: SubmissionComponent,
+                resolve: {
+                    submission: SubmissionResolver
+                }
             },
             {
                 path: "**",
@@ -30,6 +36,9 @@ const rootRoutes: Routes = [
     ],
     exports: [
         RouterModule
+    ],
+    providers: [
+        SubmissionResolver
     ]
 })
 export class SubmissionRoutingModule { }

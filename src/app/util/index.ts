@@ -7,3 +7,6 @@ export {
 export {
     SearchUtil
 } from "./search-util";
+export{
+    SnudownPipe
+}from "./snudown.pipe";

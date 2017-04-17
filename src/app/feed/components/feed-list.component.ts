@@ -1,6 +1,7 @@
 import {
     Component,
-    OnDestroy
+    OnDestroy,
+    OnInit
 } from "@angular/core";
 
 import {
@@ -12,7 +13,7 @@ import {
     GotApiCacheService
 } from "./../../services/";
 import { Subscription } from "rxjs/Subscription";
-import { FeedFilter } from "./feed-filter.model";
+import { FeedFilter } from "./../feed-filter.model";
 import { FeedService } from "./../feed.service";
 import {
     Router,
@@ -29,7 +30,7 @@ import { SubmissionDialogComponent } from "./submission-dialog.component";
     templateUrl: "./feed-list.component.html",
     styleUrls: ["./feed-list.component.css"]
 })
-export class FeedListComponent implements OnDestroy {
+export class FeedListComponent implements OnDestroy, OnInit {
 
     private submissionsCache: RedditSubmissions = [];
     submissions: RedditSubmissions = [
@@ -45,7 +46,10 @@ export class FeedListComponent implements OnDestroy {
         private router: Router,
         private dialog: MdDialog,
         private activatedRoute: ActivatedRoute) {
-        this.filterSubscription = feedService.feedFilterObservable.subscribe(filter => {
+    }
+
+    public ngOnInit(): void {
+        this.filterSubscription = this.feedService.feedFilterObservable.subscribe(filter => {
             this.feedFilter = filter;
             console.log(filter);
             this.updateList();
@@ -54,7 +58,7 @@ export class FeedListComponent implements OnDestroy {
             this.submissionsCache.push(submission);
             this.updateList();
         });
-        this.gotLive.getSubmissions(12)
+        this.gotLive.getSubmissions()
             .then(subs => {
                 this.submissionsCache = subs;
                 this.updateList();

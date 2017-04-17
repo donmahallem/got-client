@@ -17,6 +17,12 @@ export class RedditApiService {
             .map(this.extractData)
             .catch(this.handleError);
     }
+    public getSubmissionById(ids: string[] | string): Observable<RedditListingResponse<RedditSubmission>> {
+        let queryIds: string = (typeof ids === "string" ? ids : ids.join(","));
+        return this.http.get("https://api.reddit.com/by_id/" + queryIds)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
     private extractData(res: Response) {
         let body = res.json();
         return body.data || {};

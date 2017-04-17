@@ -1,7 +1,5 @@
 import {
-    Component,
-    Pipe,
-    PipeTransform
+    Component
 } from "@angular/core";
 import {
     RedditSubmission,
@@ -10,21 +8,11 @@ import {
 import {
     MdDialogRef
 } from "@angular/material";
-/// <reference path="snudown-js.d.ts" />
-import * as snudown from "snudown-js";
 import { GotApiService } from "./../../services/got-api.service";
 
 import {
     Logger
 } from "./../../util/";
-
-
-@Pipe({ name: "snudown" })
-export class SnuDownPipe implements PipeTransform {
-    transform(value: string): string {
-        return snudown.markdown(value);
-    }
-}
 
 @Component({
     templateUrl: "./submission-dialog.component.html",

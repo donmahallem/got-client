@@ -12,7 +12,7 @@ import {
 } from "./../../services/";
 import { FeedService } from "./../feed.service";
 import { Subscription } from "rxjs/Subscription";
-import { FeedFilter } from "./feed-filter.model";
+import { FeedFilter } from "./../feed-filter.model";
 import { FormControl, FormGroup } from "@angular/forms";
 
 @Component({

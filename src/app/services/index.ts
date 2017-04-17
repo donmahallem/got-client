@@ -13,3 +13,6 @@ export {
 export {
     AppConfigService
 } from "./app-config.service";
+export {
+    RedditApiService
+} from "./reddit-api.service";

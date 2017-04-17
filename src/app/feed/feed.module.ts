@@ -14,8 +14,10 @@ import {
     FeedListItemComponent,
     FeedToolbarSearchComponent
 } from "./components";
-import { RedditApiService } from "./../services/reddit-api.service";
-import { GotApiService } from "./../services/got-api.service";
+import {
+    RedditApiService,
+    GotApiService
+} from "./../services/";
 import {
     MomentFromNowPipe
 } from "./../util/";

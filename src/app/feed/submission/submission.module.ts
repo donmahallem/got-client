@@ -12,11 +12,14 @@ import {
 import {
     MaterialModule
 } from "@angular/material";
-
+import {
+    SnudownPipe
+} from "./../../util/";
 @NgModule({
     declarations: [
         SubmissionComponent,
-        SubmissionBodyComponent
+        SubmissionBodyComponent,
+        SnudownPipe
     ],
     imports: [
         CommonModule,
