@@ -84,6 +84,15 @@ export class SubmissionTitleComponentStub {
     public author: string;
 }
 
+@Component({
+    selector: "submission-body",
+    template: "<h1>content</h1>",
+})
+export class SubmissionBodyComponentStub {
+    @Input("content")
+    public content: string;
+}
+
 class ActivatedRouteStub {
 
     dataSubject: BehaviorSubject<any> = new BehaviorSubject<any>({});
@@ -111,7 +120,8 @@ describe("SubmissionComponent", () => {
                 SubmissionComponent,
                 SnudownPipe,
                 SubmissionLoadingIndicatorComponentStub,
-                SubmissionTitleComponentStub
+                SubmissionTitleComponentStub,
+                SubmissionBodyComponentStub
             ], imports: [
                 HttpModule,
                 MaterialModule,

@@ -1,14 +1,9 @@
 import {
     Component,
-    Pipe,
-    PipeTransform
+    Input,
+    OnChanges,
+    SimpleChanges
 } from "@angular/core";
-import {
-    RedditSubmission,
-    VoteState
-} from "./../../../models/"
-import { GotApiService } from "./../../../services/got-api.service";
-
 import {
     Logger
 } from "./../../../util/";
@@ -18,35 +13,29 @@ import {
     styleUrls: ["submission-body.component.css"],
     selector: "submission-body"
 })
-export class SubmissionBodyComponent {
-    public submission: RedditSubmission;
-    public voteState: VoteState = VoteState.NEUTRAL;
-    constructor(
-        private gotApi: GotApiService) {
-        //THIS IS WHACKY AS FCK
-    }
+export class SubmissionBodyComponent implements OnChanges {
+    @Input("content")
+    public content: string;
+    private _cachedContent: string;
+    constructor() { }
 
-    public vote(state: VoteState): void {
-        this.voteState = VoteState.POSITIVE;
-        this.gotApi.upvote(this.submission)
-            .subscribe(succes => {
-                Logger.log(succes);
-            });
+    public ngOnChanges(changes: SimpleChanges): void {
+        if (changes.hasOwnProperty("content")) {
+            this._cachedContent = this.parseContent(changes.content.currentValue);
+        }
     }
-
-    public openInNewTab(url: string): void {
-        let win = window.open(url, "_blank");
-        win.focus();
-    }
-
     /**
-     * opens the reddit thread corresponding to this submission
+     * Hopefully I am reading this correctly
+     * https://github.com/reddit/reddit/blob/8937ae2d3acacc4023d97462c1e4ccc3e38ec8a9/r2/r2/lib/filters.py
      */
-    public openRedditThread(): void {
-        this.openInNewTab(this.submission.url);
+    public parseContent(content: string): string {
+        let inp: string = content.replace(/\&amp\;/g, "&").replace(/\&lt\;/g, "<").replace(/\&gt\;/g, ">");
+        console.log("aaa", inp);
+        let dom = new DOMParser().parseFromString(inp, "text/html");
+        return dom.body.innerHTML;
     }
 
-    public openRedditAccount(): void {
-        this.openInNewTab("https://www.reddit.com/u/" + this.submission.author);
+    public get cachedContent(): string {
+        return this._cachedContent;
     }
 }

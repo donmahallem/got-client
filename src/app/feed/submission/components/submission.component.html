@@ -1,7 +1,7 @@
 <div *ngIf="submission">
     <submission-title [createdUtc]="submission?.created_utc" [title]="submission?.title" [author]="submission?.author"></submission-title>
     <md-divider></md-divider>
-    <div class="bodyContainer" [innerHTML]="submission?.selftext"></div>
+    <submission-body [content]="submission?.selftext_html"></submission-body>
     <md-divider></md-divider>
     <div>
         <button md-icon-button (click)="vote(1)" class="btnUpvote">
