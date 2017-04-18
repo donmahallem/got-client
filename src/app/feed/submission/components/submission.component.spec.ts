@@ -59,13 +59,18 @@ const expectedSubmission: RedditSubmission = {
     id: "abcde"
 }
 class RedditApiServiceStub {
-    getSubmissionById(ids: string[] | string): any {
+    public getSubmissionById(ids: string[] | string): any {
+        console.info("TTT");
         return Observable.throw(null);
     }
 }
-class RouterStub {
-
+@Component({
+    selector: "submission-loading-indicator",
+    template: "<h1></h1>",
+})
+export class SubmissionLoadingIndicatorComponentStub {
 }
+
 class ActivatedRouteStub {
 
     dataSubject: BehaviorSubject<any> = new BehaviorSubject<any>({});
@@ -81,16 +86,18 @@ class ActivatedRouteStub {
     params = this.paramsSubject.asObservable();
 }
 
-const activatedRouteStub: ActivatedRouteStub = new ActivatedRouteStub();
+let activatedRouteStub: ActivatedRouteStub;
 describe("SubmissionComponent", () => {
     let testHost: SubmissionComponent;
     let testHostFixture: ComponentFixture<SubmissionComponent>;
-    let router: Router;
-    beforeEach(() => {
+    let redditApiService: RedditApiService;
+    beforeEach(async(() => {
+        activatedRouteStub = new ActivatedRouteStub();
         TestBed.configureTestingModule({
             declarations: [
                 SubmissionComponent,
-                SnudownPipe
+                SnudownPipe,
+                SubmissionLoadingIndicatorComponentStub
             ], imports: [
                 HttpModule,
                 MaterialModule,
@@ -102,22 +109,37 @@ describe("SubmissionComponent", () => {
                     useClass: RedditApiServiceStub
                 },
                 {
-                    provide: Router,
-                    useClass: RouterStub
-                },
-                {
                     provide: ActivatedRoute,
                     useValue: activatedRouteStub
-                }]
-        }).compileComponents();
-        testHostFixture = TestBed.createComponent(SubmissionComponent);
-        // query for the title <h1> by CSS element selector
-        testHostFixture.detectChanges();
+                }
+            ]
+        }).compileComponents()
+            .then(() => {
+                testHostFixture = TestBed.createComponent(SubmissionComponent);
+                redditApiService = TestBed.get(RedditApiService);
+                // query for the title <h1> by CSS element selector
+                testHostFixture.detectChanges();
+            })
+    }));
+
+    describe("refreshSubmission()", () => {
+        let refreshSpy: jasmine.Spy
+        beforeEach(() => {
+            activatedRouteStub.snapshot.params.id = "testId123";
+            refreshSpy = spyOn(testHostFixture.componentInstance, "refreshSubmission").and.callThrough();
+        })
+        it("should call refresh twice", () => {
+            testHostFixture.componentInstance.refreshSubmission();
+            expect(refreshSpy.calls.count()).toEqual(2);
+            expect(refreshSpy.calls.argsFor(0)).toEqual(jasmine.arrayContaining([]));
+            expect(refreshSpy.calls.argsFor(1)).toEqual(jasmine.arrayContaining(["testId123"]));
+        });
     });
 
-    describe("onInit()", () => {
-        it("should succeed", () => {
-
+    describe("submissionId", () => {
+        it("should set the correct id", () => {
+            activatedRouteStub.snapshot.params.id = "testId";
+            expect(testHostFixture.componentInstance.submissionId).toEqual("testId");
         });
     });
 });

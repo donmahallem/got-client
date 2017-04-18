@@ -4,7 +4,6 @@ import {
     OnDestroy
 } from "@angular/core";
 import {
-    Router,
     ActivatedRoute
 } from "@angular/router";
 import {
@@ -27,8 +26,7 @@ export class SubmissionComponent implements OnInit, OnDestroy {
     public submission: RedditSubmission;
     private routeDataSubscription: Subscription;
     private routeParamsSubscription: Subscription;
-    constructor(private router: Router,
-        private route: ActivatedRoute,
+    constructor(private route: ActivatedRoute,
         private redditApi: RedditApiService) {
         this.submission = route.snapshot.data.submission;
     }

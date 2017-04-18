@@ -7,7 +7,8 @@ import { CommonModule } from "@angular/common";
 import { SubmissionRoutingModule } from "./submission-routing.module";
 import {
     SubmissionComponent,
-    SubmissionBodyComponent
+    SubmissionBodyComponent,
+    SubmissionLoadingIndicatorComponent
 } from "./components";
 import {
     MaterialModule
@@ -19,7 +20,8 @@ import {
     declarations: [
         SubmissionComponent,
         SubmissionBodyComponent,
-        SnudownPipe
+        SnudownPipe,
+        SubmissionLoadingIndicatorComponent
     ],
     imports: [
         CommonModule,
