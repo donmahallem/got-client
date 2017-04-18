@@ -32,6 +32,10 @@ export class SubmissionBodyComponent implements OnChanges {
         let inp: string = content.replace(/\&amp\;/g, "&").replace(/\&lt\;/g, "<").replace(/\&gt\;/g, ">");
         console.log("aaa", inp);
         let dom = new DOMParser().parseFromString(inp, "text/html");
+        let anchors: NodeListOf<HTMLAnchorElement> = dom.body.querySelectorAll("a");
+        for (let i = 0; i < anchors.length; i++) {
+            anchors.item(i).setAttribute("target", "_blank");
+        }
         return dom.body.innerHTML;
     }
 
