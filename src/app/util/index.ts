@@ -10,3 +10,6 @@ export {
 export{
     SnudownPipe
 }from "./snudown.pipe";
+export{
+    UtilModule
+}from "./util.module";

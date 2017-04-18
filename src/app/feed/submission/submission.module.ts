@@ -8,27 +8,29 @@ import { SubmissionRoutingModule } from "./submission-routing.module";
 import {
     SubmissionComponent,
     SubmissionBodyComponent,
-    SubmissionLoadingIndicatorComponent
+    SubmissionLoadingIndicatorComponent,
+    SubmissionTitleComponent
 } from "./components";
 import {
     MaterialModule
 } from "@angular/material";
 import {
-    SnudownPipe
+    UtilModule
 } from "./../../util/";
 @NgModule({
     declarations: [
         SubmissionComponent,
         SubmissionBodyComponent,
-        SnudownPipe,
-        SubmissionLoadingIndicatorComponent
+        SubmissionLoadingIndicatorComponent,
+        SubmissionTitleComponent
     ],
     imports: [
         CommonModule,
         HttpModule,
         ReactiveFormsModule,
         MaterialModule,
-        SubmissionRoutingModule
+        SubmissionRoutingModule,
+        UtilModule
     ],
     entryComponents: [
     ],

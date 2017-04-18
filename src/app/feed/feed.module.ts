@@ -19,7 +19,7 @@ import {
     GotApiService
 } from "./../services/";
 import {
-    MomentFromNowPipe
+    UtilModule
 } from "./../util/";
 import {
     MaterialModule
@@ -33,7 +33,6 @@ import {
         FeedListComponent,
         FeedListItemComponent,
         FeedSidebarComponent,
-        MomentFromNowPipe,
         FeedToolbarSearchComponent
     ],
     imports: [
@@ -41,9 +40,12 @@ import {
         HttpModule,
         ReactiveFormsModule,
         MaterialModule,
-        FeedRoutingModule
+        FeedRoutingModule,
+        UtilModule
     ],
     entryComponents: [
+    ], exports: [
+        UtilModule
     ],
     providers: [
         RedditApiService,

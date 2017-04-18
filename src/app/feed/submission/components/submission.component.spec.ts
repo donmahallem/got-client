@@ -8,7 +8,8 @@ import {
 } from "@angular/core/testing";
 import {
     DebugElement,
-    Component
+    Component,
+    Input
 } from "@angular/core";
 import {
     MdIcon,
@@ -70,6 +71,18 @@ class RedditApiServiceStub {
 })
 export class SubmissionLoadingIndicatorComponentStub {
 }
+@Component({
+    selector: "submission-title",
+    template: "<h1>title</h1>",
+})
+export class SubmissionTitleComponentStub {
+    @Input("title")
+    public title: string;
+    @Input("createdUtc")
+    public createdUtc: number;
+    @Input("author")
+    public author: string;
+}
 
 class ActivatedRouteStub {
 
@@ -97,7 +110,8 @@ describe("SubmissionComponent", () => {
             declarations: [
                 SubmissionComponent,
                 SnudownPipe,
-                SubmissionLoadingIndicatorComponentStub
+                SubmissionLoadingIndicatorComponentStub,
+                SubmissionTitleComponentStub
             ], imports: [
                 HttpModule,
                 MaterialModule,
