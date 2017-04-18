@@ -34,6 +34,7 @@ import {
 import {
     RedditSubmission
 } from "./../../../models/reddit-submission.model";
+import { HttpModule } from "@angular/http";
 import {
     click
 } from "./../../../../testing/";
@@ -42,12 +43,14 @@ import {
     ActivatedRoute
 } from "@angular/router";
 import { Observable } from "rxjs/Observable";
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import {
     RedditApiService
 } from "./../../../services/";
 import {
     SnudownPipe
 } from "./../../../util/";
+import { CommonModule } from "@angular/common";
 
 const expectedSubmission: RedditSubmission = {
     title: "[store] test title",
@@ -64,27 +67,34 @@ class RouterStub {
 
 }
 class ActivatedRouteStub {
+
+    dataSubject: BehaviorSubject<any> = new BehaviorSubject<any>({});
+    paramsSubject: BehaviorSubject<any> = new BehaviorSubject<any>({});
+
     snapshot = {
         data: {},
         params: {
             id: "abcde"
         }
     };
-    data = Observable.of({ id: "abcde" });
-    params = Observable.of({ id: "abcde" });
+    data = this.dataSubject.asObservable();
+    params = this.paramsSubject.asObservable();
 }
+
+const activatedRouteStub: ActivatedRouteStub = new ActivatedRouteStub();
 describe("SubmissionComponent", () => {
     let testHost: SubmissionComponent;
     let testHostFixture: ComponentFixture<SubmissionComponent>;
     let router: Router;
-    beforeEach(async(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [
                 SubmissionComponent,
-                MomentFromNowPipe,
                 SnudownPipe
             ], imports: [
-                MaterialModule
+                HttpModule,
+                MaterialModule,
+                CommonModule,
             ],
             providers: [
                 {
@@ -97,12 +107,17 @@ describe("SubmissionComponent", () => {
                 },
                 {
                     provide: ActivatedRoute,
-                    useClass: ActivatedRouteStub
+                    useValue: activatedRouteStub
                 }]
         }).compileComponents();
         testHostFixture = TestBed.createComponent(SubmissionComponent);
-        router = TestBed.get(Router);
         // query for the title <h1> by CSS element selector
         testHostFixture.detectChanges();
-    }));
+    });
+
+    describe("onInit()", () => {
+        it("should succeed", () => {
+
+        });
+    });
 });
