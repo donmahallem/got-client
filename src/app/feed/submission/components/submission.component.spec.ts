@@ -60,7 +60,6 @@ const expectedSubmission: RedditSubmission = {
 }
 class RedditApiServiceStub {
     public getSubmissionById(ids: string[] | string): any {
-        console.info("TTT");
         return Observable.throw(null);
     }
 }
@@ -135,8 +134,18 @@ describe("SubmissionComponent", () => {
             expect(refreshSpy.calls.argsFor(1)).toEqual(jasmine.arrayContaining(["testId123"]));
         });
         it("should call refresh twice", () => {
+            spyOn(testHostFixture.componentInstance, "submissionId").and.returnValue(null);
             activatedRouteStub.snapshot.params.id = null;
-            expect(testHostFixture.componentInstance.refreshSubmission).toThrow();
+            expect(() => {
+                testHostFixture.componentInstance.refreshSubmission()
+            }).toThrowError("No Submission id specified");
+            expect(refreshSpy.calls.count()).toEqual(1);
+        });
+        it("should call redditapi.getSubmissionById with correct argument", () => {
+            let apiSpy: jasmine.Spy = spyOn(redditApiService, "getSubmissionById").and.returnValue(Observable.of());
+            testHostFixture.componentInstance.refreshSubmission("test123");
+            expect(apiSpy.calls.count()).toEqual(1);
+            expect(apiSpy.calls.argsFor(0)).toEqual(jasmine.arrayContaining(["t3_test123"]));
         });
     });
 
