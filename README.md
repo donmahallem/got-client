@@ -1,6 +1,6 @@
 # GotClient
 
-[![Build Status](https://travis-ci.org/donmahallem/got-client.svg?branch=master)](https://travis-ci.org/donmahallem/got-client) [![Coverage Status](https://coveralls.io/repos/github/donmahallem/got-client/badge.svg?branch=dev)](https://coveralls.io/github/donmahallem/got-client?branch=dev)
+[![Build Status](https://travis-ci.org/donmahallem/got-client.svg?branch=master)](https://travis-ci.org/donmahallem/got-client) [![Coverage Status](https://coveralls.io/repos/github/donmahallem/got-client/badge.svg?branch=master)](https://coveralls.io/github/donmahallem/got-client?branch=master)
 
 This is the client that will be facing the user of the whole GOT-Adventure
 

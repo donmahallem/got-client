@@ -1,6 +1,7 @@
 import {
     TestBed,
     async,
+    fakeAsync,
     ComponentFixture,
     inject,
     tick
@@ -147,6 +148,44 @@ describe("SubmissionComponent", () => {
             expect(apiSpy.calls.count()).toEqual(1);
             expect(apiSpy.calls.argsFor(0)).toEqual(jasmine.arrayContaining(["t3_test123"]));
         });
+        it("should retrieve a submission by id successfully", fakeAsync(() => {
+            let testSub: any = {
+                id: "test123"
+            };
+            let resp: any = {
+                children: [
+                    {
+                        kind: "t3",
+                        data: testSub
+                    }
+                ]
+            }
+            activatedRouteStub.snapshot.params.id = "test123";
+            testHostFixture.componentInstance.submission = null;
+            let apiSpy: jasmine.Spy = spyOn(redditApiService, "getSubmissionById").and.returnValue(Observable.of(resp));
+            testHostFixture.componentInstance.refreshSubmission("test123");
+            tick();
+            expect(testHostFixture.componentInstance.submission).toEqual(jasmine.objectContaining(testSub));
+        }));
+        it("should retrieve a submission by id successfully but dont update as the displayed id changed", fakeAsync(() => {
+            let testSub: any = {
+                id: "test123"
+            };
+            let resp: any = {
+                children: [
+                    {
+                        kind: "t3",
+                        data: testSub
+                    }
+                ]
+            }
+            activatedRouteStub.snapshot.params.id = "test124";
+            testHostFixture.componentInstance.submission = null;
+            let apiSpy: jasmine.Spy = spyOn(redditApiService, "getSubmissionById").and.returnValue(Observable.of(resp));
+            testHostFixture.componentInstance.refreshSubmission("test123");
+            tick();
+            expect(testHostFixture.componentInstance.submission).toEqual(null);
+        }));
     });
 
     describe("submissionId", () => {

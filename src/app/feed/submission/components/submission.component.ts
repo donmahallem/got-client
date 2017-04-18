@@ -62,10 +62,14 @@ export class SubmissionComponent implements OnInit, OnDestroy {
         this.redditApi.getSubmissionById("t3_" + submissionId)
             .subscribe(sub => {
                 if (sub.children.length === 1 &&
-                    sub.children[0].kind === "t3" &&
-                    sub.children[0].data.id === this.submissionId) {
-                    this.submission = sub.children[0].data;
-                    Logger.info("Successfully queried reddit for", submissionId);
+                    sub.children[0].kind === "t3") {
+                    let submission: RedditSubmission = sub.children[0].data;
+                    if (submission.id === this.submissionId) {
+                        this.submission = submission;
+                        Logger.info("Successfully queried reddit for", submissionId);
+                    } else {
+                        Logger.info("Currently displaying other article than requested. Requested:", sub.children, "Displaying:", this.submissionId);
+                    }
                 } else {
                     throw new Error("didnt get the requested thing");
                 }
