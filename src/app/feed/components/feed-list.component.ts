@@ -37,7 +37,6 @@ export class FeedListComponent implements OnDestroy, OnInit {
 
     private feedFilter: FeedFilter;
     private filterSubscription: Subscription;
-    private urlSubscription: Subscription;
     constructor(private redditApiService: RedditApiService,
         private gotLive: GotLiveService,
         private feedService: FeedService,
@@ -89,7 +88,6 @@ export class FeedListComponent implements OnDestroy, OnInit {
 
 
     public ngOnDestroy() {
-        this.urlSubscription.unsubscribe();
         this.filterSubscription.unsubscribe();
     }
 }

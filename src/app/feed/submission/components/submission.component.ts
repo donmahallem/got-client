@@ -17,13 +17,14 @@ import {
 import {
     Logger
 } from "./../../../util/";
+import { XmlEntities } from "html-entities";
 
 @Component({
     templateUrl: "./submission.component.html",
     styleUrls: ["./submission.component.css"]
 })
 export class SubmissionComponent implements OnInit, OnDestroy {
-    private submission: RedditSubmission;
+    public submission: RedditSubmission;
     private routeDataSubscription: Subscription;
     private routeParamsSubscription: Subscription;
     constructor(private router: Router,
@@ -61,6 +62,11 @@ export class SubmissionComponent implements OnInit, OnDestroy {
                 if (sub.children.length === 1 && sub.children[0].kind === "t3" && sub.children[0].data.id === this.submissionId) {
                     this.submission = sub.children[0].data;
                     Logger.info("Successfully queried reddit for", submissionId);
+                    let dom = new DOMParser().parseFromString(XmlEntities.decode(sub.children[0].data.selftext_html), "text/html");
+                    console.log(dom.links);
+                    dom.links[0].setAttribute("target", "_blank");//setNamedItem({ name: "target", value: "_blank" });
+                    console.log(dom.links);
+                    console.log(dom);
                 } else {
                     throw new Error("didnt get the requested thing");
                 }

@@ -23,6 +23,7 @@ import { SearchUtil } from "./../../util/";
 })
 export class FeedToolbarSearchComponent implements OnDestroy {
     public stateCtrl: FormControl;
+    filteredStates: any;
 
     states = [
         "Alabama",
@@ -40,7 +41,7 @@ export class FeedToolbarSearchComponent implements OnDestroy {
         this.inputSubscription.unsubscribe();
     }
 
-    filterStates(val: string) {
+    public filterStates(val: string) {
         return val ? this.states.filter(s => new RegExp(`^${val}`, "gi").test(s))
             : this.states;
     }

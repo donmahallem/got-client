@@ -1,0 +1,16 @@
+.bodyContainer{
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color:rgba(0,0,0,0.05);
+    padding:20px;
+}
+div.spacer{
+    flex: auto;
+}
+
+md-icon.positive{
+    color:#4CAF50; /* GREEN500*/
+}
+md-icon.negative{
+    color:#F44336; /* RED500 */
+}

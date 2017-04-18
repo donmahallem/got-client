@@ -1,5 +1,8 @@
 <div *ngIf="submission">
-    <div [innerHTML]="submission?.selftext|snudown"></div>
+    <h2>{{submission.title}}</h2>
+    <md-divider></md-divider>
+    <div class="bodyContainer" [innerHTML]="submission?.selftext|snudown"></div>
+    <md-divider></md-divider>
     <div>
         <button md-icon-button (click)="vote(1)" class="btnUpvote">
         <md-icon [ngClass]="{positive:voteState==1}">thumb_up</md-icon>
@@ -16,7 +19,7 @@
     </button>
     </div>
 </div>
-<div *ngIf="!submission">
+<div *ngIf="!submission" class="loading-container">
     <md-progress-spinner mode="indeterminate"></md-progress-spinner>
     <h4>Loading...</h4>
 </div>
