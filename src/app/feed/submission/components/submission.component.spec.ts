@@ -134,6 +134,10 @@ describe("SubmissionComponent", () => {
             expect(refreshSpy.calls.argsFor(0)).toEqual(jasmine.arrayContaining([]));
             expect(refreshSpy.calls.argsFor(1)).toEqual(jasmine.arrayContaining(["testId123"]));
         });
+        it("should call refresh twice", () => {
+            activatedRouteStub.snapshot.params.id = null;
+            expect(testHostFixture.componentInstance.refreshSubmission).toThrow();
+        });
     });
 
     describe("submissionId", () => {
