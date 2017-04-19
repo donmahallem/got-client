@@ -6,13 +6,12 @@ import {
 
 describe("RedditSubmission", () => {
     describe("parseType()", () => {
-        it("should detect a store submission from the flair", () => {
+        it("should detect a trade submission from the flair", () => {
             let submission: RedditSubmission = new RedditSubmission();
-            submission.link_flair_text = "Store";
-            expect(RedditSubmission.parseType(submission)).toEqual(RedditSubmissionType.STORE);
+            submission.link_flair_text = "Trade";
+            expect(RedditSubmission.parseType(submission)).toEqual(RedditSubmissionType.TRADE);
         });
-        it("should detect a store submission from the title", () => {
-            let submission: RedditSubmission = new RedditSubmission();
+        it("should detect a trade submission from the title", () => {
             let titles: string[] = [
                 "[H] a [W] b",
                 "[H] a [w] b",
@@ -24,8 +23,9 @@ describe("RedditSubmission", () => {
                 "[w] a [H] b"
             ];
             for (let title of titles) {
+                let submission: RedditSubmission = new RedditSubmission();
                 submission.title = title;
-                expect(RedditSubmission.parseType(submission)).toEqual(RedditSubmissionType.STORE);
+                expect(RedditSubmission.parseType(submission)).toEqual(RedditSubmissionType.TRADE);
             }
         });
     });
