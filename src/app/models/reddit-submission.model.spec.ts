@@ -14,18 +14,52 @@ describe("RedditSubmission", () => {
         it("should detect a trade submission from the title", () => {
             let titles: string[] = [
                 "[H] a [W] b",
-                "[H] a [w] b",
-                "[h] a [W] b",
-                "[h] a [w] b",
-                "[W] a [H] b",
-                "[W] a [h] b",
-                "[w] a [h] b",
-                "[w] a [H] b"
+                "[H] aasdf [w] b",
+                "[h] aas sadffasdfasd [W] b af asdf as",
+                "[h] asdaf asf  [w] b asdf asd ",
+                "[W] asdaf a sdaf sad [H] bas saf",
+                "[W] aas assd  [h] b asd sda ",
+                "[w] a asdAasdf asd [h] bs adsd fsda asd ",
+                "[w] a sdafas [H] bsad asdf asdf "
             ];
             for (let title of titles) {
                 let submission: RedditSubmission = new RedditSubmission();
                 submission.title = title;
                 expect(RedditSubmission.parseType(submission)).toEqual(RedditSubmissionType.TRADE);
+            }
+        });
+        it("should detect a store submission from the flair", () => {
+            let submission: RedditSubmission = new RedditSubmission();
+            submission.link_flair_text = "Store";
+            expect(RedditSubmission.parseType(submission)).toEqual(RedditSubmissionType.STORE);
+        });
+        it("should detect a store submission from the title", () => {
+            let titles: string[] = [
+                "[store] dasi as dfm asdoif asd",
+                "[STORE] dasi as dfm asdoif asd",
+                "[StOrE] dasi as dfm asdoif asd"
+            ];
+            for (let title of titles) {
+                let submission: RedditSubmission = new RedditSubmission();
+                submission.title = title;
+                expect(RedditSubmission.parseType(submission)).toEqual(RedditSubmissionType.STORE);
+            }
+        });
+        it("should detect a question submission from the flair", () => {
+            let submission: RedditSubmission = new RedditSubmission();
+            submission.link_flair_text = "Question";
+            expect(RedditSubmission.parseType(submission)).toEqual(RedditSubmissionType.QUESTION);
+        });
+        it("should detect a question submission from the title", () => {
+            let titles: string[] = [
+                "[q] dasi as dfm asdoif asd",
+                "[q] dasi as dfm asdoif asd",
+                "[q] dasi as dfm asdoif asd"
+            ];
+            for (let title of titles) {
+                let submission: RedditSubmission = new RedditSubmission();
+                submission.title = title;
+                expect(RedditSubmission.parseType(submission)).toEqual(RedditSubmissionType.QUESTION);
             }
         });
     });
