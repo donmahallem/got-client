@@ -8,8 +8,5 @@ export {
     SearchUtil
 } from "./search-util";
 export{
-    SnudownPipe
-}from "./snudown.pipe";
-export{
     UtilModule
 }from "./util.module";

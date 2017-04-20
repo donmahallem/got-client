@@ -49,9 +49,6 @@ import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import {
     RedditApiService
 } from "./../../../services/";
-import {
-    SnudownPipe
-} from "./../../../util/";
 import { CommonModule } from "@angular/common";
 
 const expectedSubmission: RedditSubmission = {
@@ -118,7 +115,6 @@ describe("SubmissionComponent", () => {
         TestBed.configureTestingModule({
             declarations: [
                 SubmissionComponent,
-                SnudownPipe,
                 SubmissionLoadingIndicatorComponentStub,
                 SubmissionTitleComponentStub,
                 SubmissionBodyComponentStub
