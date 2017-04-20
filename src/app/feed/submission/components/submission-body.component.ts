@@ -30,10 +30,15 @@ export class SubmissionBodyComponent implements OnChanges {
      */
     public parseContent(content: string): string {
         let inp: string = content.replace(/\&amp\;/g, "&").replace(/\&lt\;/g, "<").replace(/\&gt\;/g, ">");
-        console.log("aaa", inp);
         let dom = new DOMParser().parseFromString(inp, "text/html");
         let anchors: NodeListOf<HTMLAnchorElement> = dom.body.querySelectorAll("a");
         for (let i = 0; i < anchors.length; i++) {
+            let href: string = anchors.item(i).getAttribute("href");
+            if (typeof href === "string") {
+                if (href.match(/^(http|https|)\:\/\/i\.imgur\.com\/.*/i)) {
+                    console.log("imgur link found", href);
+                }
+            }
             anchors.item(i).setAttribute("target", "_blank");
         }
         return dom.body.innerHTML;
