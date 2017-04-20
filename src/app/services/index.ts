@@ -5,9 +5,6 @@ export {
     GotApiService
 } from "./got-api.service";
 export {
-    GotApiCacheService
-} from "./got-api-cache.service";
-export {
     GotLiveService
 } from "./got-live.service";
 export {
@@ -16,3 +13,7 @@ export {
 export {
     RedditApiService
 } from "./reddit-api.service";
+export {
+    ChangeEvent,
+    ChangeType
+} from "./submission-database";

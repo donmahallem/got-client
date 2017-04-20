@@ -5,12 +5,13 @@ import {
 } from "@angular/core";
 
 import {
-    RedditSubmissions
+    RedditSubmissions,
+    RedditSubmission
 } from "./../../models/"
 import { RedditApiService } from "./../../services/reddit-api.service";
 import {
     GotLiveService,
-    GotApiCacheService
+    ChangeType
 } from "./../../services/";
 import { Subscription } from "rxjs/Subscription";
 import { FeedFilter } from "./../feed-filter.model";
@@ -23,6 +24,10 @@ import {
     MdDialog,
     MdDialogRef
 } from "@angular/material";
+import {
+    Observable
+} from "rxjs/Observable";
+
 
 @Component({
     selector: "feed-list",
@@ -31,16 +36,15 @@ import {
 })
 export class FeedListComponent implements OnDestroy, OnInit {
 
-    private submissionsCache: RedditSubmissions = [];
-    submissions: RedditSubmissions = [
+    private _submissions: RedditSubmissions = [
     ];
 
     private feedFilter: FeedFilter;
     private filterSubscription: Subscription;
+    private databaseChangeSubscription: Subscription;
     constructor(private redditApiService: RedditApiService,
         private gotLive: GotLiveService,
         private feedService: FeedService,
-        private gotApiCache: GotApiCacheService,
         private router: Router,
         private dialog: MdDialog, ) {
     }
@@ -51,36 +55,32 @@ export class FeedListComponent implements OnDestroy, OnInit {
             console.log(filter);
             this.updateList();
         });
-        this.gotLive.submissionObservable.subscribe(submission => {
-            this.submissionsCache.push(submission);
-            this.updateList();
-        });
-        this.gotLive.getSubmissions()
-            .then(subs => {
-                this.submissionsCache = subs;
-                this.updateList();
+        this.databaseChangeSubscription = this.gotLive.submissionUpdate
+            .debounceTime(500)
+            .subscribe(evt => {
+                this.refreshList();
             });
+        this.refreshList();
+    }
+
+    public refreshList(): void {
+        this.gotLive.getSubmissions().then((data) => {
+            this.submissions = data;
+        })
+    }
+
+    public get submissions(): RedditSubmissions {
+        return this._submissions;
+    }
+
+    public set submissions(submissions: RedditSubmissions) {
+        this._submissions = submissions;
+        this._submissions.sort(function (a, b) {
+            return b.created_utc - a.created_utc;
+        });
     }
 
     private updateList() {
-        this.submissions = this.submissionsCache.filter(sub => {
-            if (sub.link_flair_text) {
-                if (sub.link_flair_text.match(/^trade$/i) && this.feedFilter.trade) {
-                    return true;
-                } else if (sub.link_flair_text.match(/^store$/i) && this.feedFilter.store) {
-                    return true;
-                } else if (sub.link_flair_text.match(/^question$/i) && this.feedFilter.question) {
-                    return true;
-                } else if (sub.link_flair_text.match(/^psa$/i) && this.feedFilter.psa) {
-                    return true;
-                } else if (sub.link_flair_text.match(/^pricecheck$/i) && this.feedFilter.pricecheck) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-            return true;
-        });
         this.submissions.sort(function (a, b) {
             return b.created_utc - a.created_utc;
         });
@@ -88,6 +88,7 @@ export class FeedListComponent implements OnDestroy, OnInit {
 
 
     public ngOnDestroy() {
+        this.databaseChangeSubscription.unsubscribe();
         this.filterSubscription.unsubscribe();
     }
 }

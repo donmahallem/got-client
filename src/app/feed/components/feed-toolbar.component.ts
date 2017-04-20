@@ -2,6 +2,9 @@ import {
     Component,
     OnDestroy
 } from "@angular/core";
+import {
+    Router
+} from "@angular/router";
 import { FeedService } from "./../feed.service";
 import { Subscription } from "rxjs/Subscription";
 
@@ -13,7 +16,8 @@ import { Subscription } from "rxjs/Subscription";
 export class FeedToolbarComponent implements OnDestroy {
     private sidebarSubscription: Subscription;
     public sidebarOpen: boolean = false;
-    constructor(private feedService: FeedService) {
+    constructor(private feedService: FeedService,
+        private router: Router) {
         this.sidebarSubscription = feedService.sidebarOpenObservable
             .subscribe(open => {
                 this.sidebarOpen = open;
@@ -26,5 +30,9 @@ export class FeedToolbarComponent implements OnDestroy {
 
     public toggleSidebar(): void {
         this.feedService.toggleSidebar();
+    }
+
+    public goToHome(): void {
+        this.router.navigate(["feed"]);
     }
 }

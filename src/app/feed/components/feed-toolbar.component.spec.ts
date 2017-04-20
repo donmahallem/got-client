@@ -35,9 +35,15 @@ import {
 import {
     FeedService
 } from "./../feed.service";
-import { Observable } from "rxjs/Observable";
-import { BehaviorSubject } from "rxjs/BehaviorSubject";
-
+import {
+    Observable
+} from "rxjs/Observable";
+import {
+    BehaviorSubject
+} from "rxjs/BehaviorSubject";
+import {
+    Router
+} from "@angular/router";
 
 const sidebarOpenSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
@@ -52,6 +58,11 @@ class FeedServiceStub {
 
     }
     public sidebarOpenObservable: Observable<boolean> = sidebarOpenSubject.asObservable();
+}
+class RouterStub {
+    public navigate = jasmine.createSpy("navigate", (url: any[], args: any) => {
+
+    });
 }
 describe("FeedToolbarComponent", () => {
     let componentFixture: ComponentFixture<FeedToolbarComponent>;
@@ -68,6 +79,10 @@ describe("FeedToolbarComponent", () => {
                 {
                     provide: FeedService,
                     useClass: FeedServiceStub
+                },
+                {
+                    provide: Router,
+                    useClass: RouterStub
                 }
             ]
         }).compileComponents();

@@ -2,18 +2,28 @@ import {
     Component,
     OnDestroy
 } from "@angular/core";
-
 import {
     RedditSubmissions
 } from "./../../models/"
-import { RedditApiService } from "./../../services/reddit-api.service";
+import {
+    RedditApiService
+} from "./../../services/reddit-api.service";
 import {
     GotLiveService
 } from "./../../services/";
-import { FeedService } from "./../feed.service";
-import { Subscription } from "rxjs/Subscription";
-import { FeedFilter } from "./../feed-filter.model";
-import { FormControl, FormGroup } from "@angular/forms";
+import {
+    FeedService
+} from "./../feed.service";
+import {
+    Subscription
+} from "rxjs/Subscription";
+import {
+    FeedFilter
+} from "./../feed-filter.model";
+import {
+    FormControl,
+    FormGroup
+} from "@angular/forms";
 
 @Component({
     selector: "feed-sidebar",

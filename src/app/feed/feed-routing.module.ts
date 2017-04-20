@@ -20,6 +20,10 @@ const rootRoutes: Routes = [
                 loadChildren: "app/feed/submission/submission.module#SubmissionModule"
             },
             {
+                path: "search",
+                loadChildren: "app/feed/search/search.module#SearchModule"
+            },
+            {
                 path: "",
                 component: FeedListComponent
             }

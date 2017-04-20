@@ -1,1 +1,2 @@
-<div [innerHTML]="cachedContent"></div>
+<div *ngIf="cachedContent" [innerHTML]="cachedContent"></div>
+<div *ngIf="!cachedContent">Empty Submission</div>

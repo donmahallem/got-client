@@ -28,8 +28,7 @@ import {
     AppConfigService,
     GotAuthService,
     GotApiService,
-    GotLiveService,
-    GotApiCacheService
+    GotLiveService
 } from "./services/"
 
 
@@ -55,7 +54,6 @@ export function configServiceFactory(config: AppConfigService) {
         GotAuthService,
         GotApiService,
         GotLiveService,
-        GotApiCacheService,
         {
             provide: APP_INITIALIZER,
             useFactory: configServiceFactory,

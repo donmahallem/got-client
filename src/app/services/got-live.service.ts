@@ -25,7 +25,10 @@ import {
 import { Logger } from "./../util";
 import { Subject } from "rxjs/Subject";
 import * as moment from "moment";
-import { SubmissionDatabase } from "./submission-database";
+import {
+    SubmissionDatabase,
+    ChangeEvent
+} from "./submission-database";
 import Dexie from "dexie";
 
 
@@ -66,15 +69,19 @@ export class GotLiveService {
         }, GotLiveService.MINUTE);
     }
 
-    private storeSubmissions(submissions: RedditSubmissions): Dexie.Promise<string> {
+    public get submissionUpdate(): Observable<ChangeEvent> {
+        return this._db.changeObservable;
+    }
+
+    public storeSubmissions(submissions: RedditSubmissions): Dexie.Promise<string> {
         return this._db.submissions.bulkPut(submissions)
             .then(result => {
-
+                this.submissionsUpdatedSource.next(submissions.map(val => { return val.id; }));
                 return result;
             });
     }
 
-    private storeSubmission(submission: RedditSubmission): Dexie.Promise<string> {
+    public storeSubmission(submission: RedditSubmission): Dexie.Promise<string> {
         return this._db.submissions.put(submission).
             then(result => {
                 this.submissionsUpdatedSource.next([result]);
@@ -99,7 +106,7 @@ export class GotLiveService {
 
     public getSubmissions(limit: number = -1): Dexie.Promise<RedditSubmissions> {
         let col: Dexie.Collection<RedditSubmission, string> = this._db.submissions
-            .orderBy("created_utc");
+            .orderBy("created_utc").reverse();
         if (limit > 0) {
             col = col.limit(limit);
         }

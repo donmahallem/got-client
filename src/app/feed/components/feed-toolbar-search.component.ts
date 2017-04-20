@@ -2,8 +2,12 @@ import {
     Component,
     OnDestroy
 } from "@angular/core";
-import { FormControl } from "@angular/forms";
-import { Router } from "@angular/router";
+import {
+    FormControl
+} from "@angular/forms";
+import {
+    Router
+} from "@angular/router";
 import {
     trigger,
     state,
@@ -12,9 +16,15 @@ import {
     transition
 } from "@angular/animations";
 import "rxjs/add/operator/startWith";
-import { Subscription } from "rxjs/Subscription";
-import { Observable } from "rxjs/Observable";
-import { SearchUtil } from "./../../util/";
+import {
+    Subscription
+} from "rxjs/Subscription";
+import {
+    Observable
+} from "rxjs/Observable";
+import {
+    SearchUtil
+} from "./../../util/";
 
 @Component({
     selector: "feed-toolbar-search",
