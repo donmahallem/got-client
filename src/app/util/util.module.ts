@@ -2,19 +2,17 @@ import {
     NgModule
 } from "@angular/core";
 import {
-    SnudownPipe,
     MomentFromNowPipe
 } from "./"
 @NgModule({
     declarations: [
-        MomentFromNowPipe,
-        SnudownPipe
+        MomentFromNowPipe
     ],
     imports: [
     ],
     entryComponents: [
     ], exports: [
-        MomentFromNowPipe, SnudownPipe
+        MomentFromNowPipe
     ]
 })
 export class UtilModule { }
