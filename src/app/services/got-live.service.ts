@@ -90,7 +90,7 @@ export class GotLiveService {
     }
 
     public searchSubmissions(txt: string[]) {
-        return this._db.submissions.where("searchWords").anyOf(txt);
+        return this._db.submissions.where("searchWords").anyOfIgnoreCase(txt);
     }
 
     public getSubmission(id: string): Dexie.Promise<RedditSubmission> {
