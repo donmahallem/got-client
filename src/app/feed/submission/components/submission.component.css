@@ -14,3 +14,8 @@ md-icon.positive{
 md-icon.negative{
     color:#F44336; /* RED500 */
 }
+
+.closed{
+    -moz-text-decoration-color: red;
+    text-decoration: line-through red;
+}

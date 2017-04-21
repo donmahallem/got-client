@@ -12,12 +12,18 @@ import {
     UtilModule
 } from "./../../util/";
 import {
-    SearchComponent
+    SearchComponent,
+    SearchResultItemComponent
 } from "./components";
+import {
+    SearchHighlightPipe
+} from "./pipes";
 
 @NgModule({
     declarations: [
-        SearchComponent
+        SearchComponent,
+        SearchResultItemComponent,
+        SearchHighlightPipe
     ],
     imports: [
         CommonModule,

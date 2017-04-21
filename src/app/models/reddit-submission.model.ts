@@ -20,6 +20,7 @@ export class RedditSubmission {
     selftext?: string;
     selftext_html?: string;
     url?: string;
+    over_18: boolean;
 
     public static parseType(submission: RedditSubmission): RedditSubmissionType {
         if (typeof submission.link_flair_text === "string"

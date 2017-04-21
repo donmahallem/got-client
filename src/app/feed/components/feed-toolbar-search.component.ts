@@ -42,9 +42,16 @@ export class FeedToolbarSearchComponent implements OnDestroy {
     private inputSubscription: Subscription;
     constructor(private router: Router) {
         this.stateCtrl = new FormControl();
-        this.inputSubscription = this.stateCtrl.valueChanges.subscribe(value => {
-            console.log(value);
-        });
+        this.inputSubscription = this.stateCtrl.valueChanges
+            .debounceTime(500)
+            .subscribe(value => {
+                console.log(value);
+                this.router.navigate(["feed", "search"], {
+                    queryParams: {
+                        q: SearchUtil.sanitize(this.stateCtrl.value)
+                    }
+                });
+            });
     }
 
     public ngOnDestroy() {

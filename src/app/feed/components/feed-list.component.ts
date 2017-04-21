@@ -27,6 +27,13 @@ import {
 import {
     Observable
 } from "rxjs/Observable";
+import {
+    trigger,
+    state,
+    style,
+    animate,
+    transition
+} from '@angular/animations';
 
 
 @Component({
@@ -42,6 +49,7 @@ export class FeedListComponent implements OnDestroy, OnInit {
     private feedFilter: FeedFilter;
     private filterSubscription: Subscription;
     private databaseChangeSubscription: Subscription;
+    private refreshSubscription: Subscription;
     constructor(private redditApiService: RedditApiService,
         private gotLive: GotLiveService,
         private feedService: FeedService,
@@ -56,15 +64,27 @@ export class FeedListComponent implements OnDestroy, OnInit {
             this.updateList();
         });
         this.databaseChangeSubscription = this.gotLive.submissionUpdate
-            .debounceTime(500)
+            .debounceTime(200)
             .subscribe(evt => {
-                this.refreshList();
+                if (evt.type == ChangeType.DELETE) {
+
+                } else if (evt.type === ChangeType.CREATE) {
+                    this.refreshList();
+                } else if (evt.type === ChangeType.UPDATE) {
+                    this.refreshList();
+                }
             });
-        this.refreshList();
+        this.refreshList()
     }
 
     public refreshList(): void {
+        if (this.refreshSubscription && !this.refreshSubscription.closed) {
+            //already polling
+            return;
+        }
         this.gotLive.getSubmissions().then((data) => {
+            this._submissions = this._submissions.slice(0, 0);
+            this._submissions.concat(data);
             this.submissions = data;
         })
     }

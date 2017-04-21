@@ -89,6 +89,10 @@ export class GotLiveService {
             });
     }
 
+    public searchSubmissions(txt: string[]) {
+        return this._db.submissions.where("searchWords").anyOf(txt);
+    }
+
     public getSubmission(id: string): Dexie.Promise<RedditSubmission> {
         return this._db.submissions.get(id);
     }

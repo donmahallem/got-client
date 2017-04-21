@@ -1,1 +1,4 @@
 <h1>search</h1>
+<md-nav-list>
+    <search-result-item *ngFor="let submission of submissions" [submission]="submission" [searchTerms]="searchTerms"></search-result-item>
+</md-nav-list>
