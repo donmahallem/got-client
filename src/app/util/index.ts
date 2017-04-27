@@ -4,3 +4,9 @@ export {
 export {
     Logger
 } from "./logger";
+export {
+    SearchUtil
+} from "./search-util";
+export{
+    UtilModule
+}from "./util.module";

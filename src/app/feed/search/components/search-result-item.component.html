@@ -1,0 +1,6 @@
+<md-list-item (click)="click()" [ngClass]="{'closed':submission.over_18==true}">
+    <md-icon md-list-icon>{{icon}}</md-icon>
+    <h4 md-line>{{submission.title}}</h4>
+    <p md-line>submitted <span title="{{submission.created_utc * 1000 | date:'medium'}}">{{submission.created_utc * 1000 | momentFromNow }}</span>        by {{submission.author}}</p>
+    <div md-line class="body-container" [innerHtml]="submission.selftext_html | searchHighlight:searchTerms"></div>
+</md-list-item>

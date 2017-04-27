@@ -4,7 +4,10 @@ language: node_js
 node_js:
   - '7'
   - '6'
-
+cache:
+  directories:
+    - node_modules
+    - $(npm config get prefix)/node_modules
 addons:
 apt:
   sources:
@@ -23,5 +26,7 @@ before_script:
 - npm install -g karma
 - npm install
 - npm run build
+- npm run test-ci
 
 script: karma start karma.conf.js --single-run
+after_script: "npm install coveralls && cat ./coverage/lcov.info | coveralls"

@@ -1,0 +1,23 @@
+<div *ngIf="submission">
+    <submission-title [createdUtc]="submission?.created_utc" [title]="submission?.title" [author]="submission?.author" [ngClass]="{'closed':submission.over_18}"></submission-title>
+    <h4 *ngIf="submission.over_18">CLOSED</h4>
+    <md-divider></md-divider>
+    <submission-body [content]="submission?.selftext_html"></submission-body>
+    <md-divider></md-divider>
+    <div>
+        <button md-icon-button (click)="vote(1)" class="btnUpvote">
+        <md-icon [ngClass]="{positive:submission.likes}">thumb_up</md-icon>
+    </button>
+        <button md-icon-button (click)="vote(-1)" class="btnDownvote">
+        <md-icon [ngClass]="{negative:submission.likes===false}">thumb_down</md-icon>
+    </button>
+        <div class="spacer"></div>
+        <button md-icon-button class="btnRedditThread" (click)="openRedditThread()">
+        <md-icon>launch</md-icon>
+    </button>
+        <button md-icon-button class="btnRedditUser" (click)="openRedditAccount()">
+        <md-icon>account_circle</md-icon>
+    </button>
+    </div>
+</div>
+<submission-loading-indicator *ngIf="!submission"></submission-loading-indicator>

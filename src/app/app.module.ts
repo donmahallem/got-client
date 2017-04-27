@@ -1,35 +1,34 @@
 import {
     BrowserModule
-} from '@angular/platform-browser';
+} from "@angular/platform-browser";
 import {
     NgModule,
     APP_INITIALIZER
-} from '@angular/core';
+} from "@angular/core";
 import {
     FormsModule
-} from '@angular/forms';
+} from "@angular/forms";
 import {
     HttpModule
-} from '@angular/http';
+} from "@angular/http";
 
 import {
     AppComponent
-} from './app.component';
+} from "./app.component";
 import {
     AppRoutingModule
 } from "./app-routing.module";
 import {
     MaterialModule
-} from '@angular/material';
+} from "@angular/material";
 import {
     BrowserAnimationsModule
-} from '@angular/platform-browser/animations';
+} from "@angular/platform-browser/animations";
 import {
     AppConfigService,
     GotAuthService,
     GotApiService,
-    GotLiveService,
-    GotApiCacheService
+    GotLiveService
 } from "./services/"
 
 
@@ -55,7 +54,6 @@ export function configServiceFactory(config: AppConfigService) {
         GotAuthService,
         GotApiService,
         GotLiveService,
-        GotApiCacheService,
         {
             provide: APP_INITIALIZER,
             useFactory: configServiceFactory,

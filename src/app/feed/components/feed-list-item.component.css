@@ -1,0 +1,19 @@
+/*
+@keyframes MyAnimation {
+  0% {
+      background-color:#888888;
+      opacity: 0.5;
+  }
+  100% {
+      background-color:#eeeeee;
+      opacity: 1;
+  } 
+}
+
+md-list-item {
+  animation: MyAnimation 0.5s;
+}*/
+
+:host{
+    opacity: 0.6;
+}

@@ -1,0 +1,12 @@
+:host{
+    display:flex;
+    color:white;
+}
+
+md-checkbox.checkbox-margin {
+  margin: 0 10px;
+}
+
+div.spacer{
+    flex:auto;
+}

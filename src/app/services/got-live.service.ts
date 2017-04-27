@@ -1,6 +1,6 @@
 /// <reference path="./EventSource.d.ts"/>
 
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import {
     Http,
     Response,
@@ -9,43 +9,28 @@ import {
     RequestOptionsArgs,
     Request,
     RequestMethod
-} from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
+} from "@angular/http";
+import { Observable } from "rxjs/Observable";
+import "rxjs/add/operator/catch";
+import "rxjs/add/operator/map";
 import {
     RedditSubmission,
     RedditSubmissions,
     RedditListingResponse,
     GotUser
-} from './../models/';
+} from "./../models/";
 import {
     GotAuthService
 } from "./got-auth.service";
 import { Logger } from "./../util";
-import { Subject } from 'rxjs/Subject';
-import Dexie from 'dexie';
+import { Subject } from "rxjs/Subject";
 import * as moment from "moment";
+import {
+    SubmissionDatabase,
+    ChangeEvent
+} from "./submission-database";
+import Dexie from "dexie";
 
-class SubmissionDB extends Dexie {
-    submissions: Dexie.Table<RedditSubmission, string>;
-    constructor() {
-        super("SubmissionDB");
-        this.version(1).stores({ submissions: "id,created_utc,author" });
-    }
-}
-
-@Injectable()
-export class GotApiCacheService {
-    private _db: SubmissionDB;
-    constructor() {
-        this._db = new SubmissionDB();
-    }
-
-    public store(submission: RedditSubmission) {
-        this._db.submissions.put(submission);
-    }
-}
 
 @Injectable()
 export class GotLiveService {
@@ -57,10 +42,10 @@ export class GotLiveService {
     private submissionsUpdatedSource = new Subject<string[]>();
     public readonly submissionsUpdated = this.submissionsUpdatedSource.asObservable();
 
-    private _db: SubmissionDB;
+    private _db: SubmissionDatabase;
     private eventSource: EventSource;
     constructor() {
-        this._db = new SubmissionDB();
+        this._db = new SubmissionDatabase();
         this.eventSource = new EventSource("https://got.xants.de/api/v1/reddit/live");
         this.eventSource.addEventListener("submission", submission => {
             const sub = JSON.parse(submission.data);
@@ -84,20 +69,28 @@ export class GotLiveService {
         }, GotLiveService.MINUTE);
     }
 
-    private storeSubmissions(submissions: RedditSubmissions): Dexie.Promise<string> {
+    public get submissionUpdate(): Observable<ChangeEvent> {
+        return this._db.changeObservable;
+    }
+
+    public storeSubmissions(submissions: RedditSubmissions): Dexie.Promise<string> {
         return this._db.submissions.bulkPut(submissions)
             .then(result => {
-
+                this.submissionsUpdatedSource.next(submissions.map(val => { return val.id; }));
                 return result;
             });
     }
 
-    private storeSubmission(submission: RedditSubmission): Dexie.Promise<string> {
+    public storeSubmission(submission: RedditSubmission): Dexie.Promise<string> {
         return this._db.submissions.put(submission).
             then(result => {
                 this.submissionsUpdatedSource.next([result]);
                 return result;
             });
+    }
+
+    public searchSubmissions(txt: string[]) {
+        return this._db.submissions.where("searchWords").anyOfIgnoreCase(txt);
     }
 
     public getSubmission(id: string): Dexie.Promise<RedditSubmission> {
@@ -117,7 +110,7 @@ export class GotLiveService {
 
     public getSubmissions(limit: number = -1): Dexie.Promise<RedditSubmissions> {
         let col: Dexie.Collection<RedditSubmission, string> = this._db.submissions
-            .orderBy("created_utc");
+            .orderBy("created_utc").reverse();
         if (limit > 0) {
             col = col.limit(limit);
         }

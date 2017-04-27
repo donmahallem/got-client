@@ -5,11 +5,15 @@ export {
     GotApiService
 } from "./got-api.service";
 export {
-    GotApiCacheService
-} from "./got-api-cache.service";
-export {
     GotLiveService
 } from "./got-live.service";
 export {
     AppConfigService
 } from "./app-config.service";
+export {
+    RedditApiService
+} from "./reddit-api.service";
+export {
+    ChangeEvent,
+    ChangeType
+} from "./submission-database";

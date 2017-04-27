@@ -1,17 +1,33 @@
-import { NgModule } from '@angular/core';
+import { NgModule } from "@angular/core";
 import {
     RouterModule,
     Routes,
     Data
-} from '@angular/router';
-import { BrowserModule } from '@angular/platform-browser';
-import { FeedComponent } from "./feed.component";
-import { SubmissionDialogComponent } from "./submission-dialog.component";
+} from "@angular/router";
+import { BrowserModule } from "@angular/platform-browser";
+import {
+    FeedListComponent,
+    FeedComponent
+} from "./components/";
 
 const rootRoutes: Routes = [
     {
-        path: "**",
-        component: FeedComponent
+        path: "",
+        component: FeedComponent,
+        children: [
+            {
+                path: "submission",
+                loadChildren: "app/feed/submission/submission.module#SubmissionModule"
+            },
+            {
+                path: "search",
+                loadChildren: "app/feed/search/search.module#SearchModule"
+            },
+            {
+                path: "",
+                component: FeedListComponent
+            }
+        ]
     }
 ];
 

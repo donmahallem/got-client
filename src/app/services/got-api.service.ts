@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import {
     Http,
     Response,
@@ -7,23 +7,23 @@ import {
     RequestOptionsArgs,
     Request,
     RequestMethod
-} from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
+} from "@angular/http";
+import { Observable } from "rxjs/Observable";
+import "rxjs/add/operator/catch";
+import "rxjs/add/operator/map";
 import {
     RedditSubmission,
     RedditSubmissions,
     RedditListingResponse,
     GotUser
-} from './../models/';
+} from "./../models/";
 import {
     GotAuthService
 } from "./got-auth.service";
 
 @Injectable()
 export class GotApiService {
-    private heroesUrl = 'https://api.reddit.com/r/GlobalOffensiveTrade/new';  // URL to web API
+    private heroesUrl = "https://api.reddit.com/r/GlobalOffensiveTrade/new";  // URL to web API
     constructor(private http: Http,
         private gotAuth: GotAuthService) { }
 
@@ -46,7 +46,7 @@ export class GotApiService {
         return this.request("/api/v1/user/me", options);
     }
 
-    getNewSubmissions(): Observable<RedditListingResponse<RedditSubmission>> {
+    public getNewSubmissions(): Observable<RedditListingResponse<RedditSubmission>> {
         return this.http.get(this.heroesUrl)
             .map(this.extractData)
             .catch(this.handleError);
@@ -60,9 +60,9 @@ export class GotApiService {
         // In a real world app, you might use a remote logging infrastructure
         let errMsg: string;
         if (error instanceof Response) {
-            const body = error.json() || '';
+            const body = error.json() || "";
             const err = body.error || JSON.stringify(body);
-            errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+            errMsg = `${error.status} - ${error.statusText || ""} ${err}`;
         } else {
             errMsg = error.message ? error.message : error.toString();
         }
