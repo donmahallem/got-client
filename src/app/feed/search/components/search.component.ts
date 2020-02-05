@@ -8,7 +8,7 @@ import {
 } from '@angular/router';
 import {
     Subscription
-} from 'Subscription';
+} from 'rxjs';
 import {
     RedditSubmissions
 } from './../../../models';
@@ -24,7 +24,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     public submissions: RedditSubmissions = [];
     public searchTerms: string[] = [];
     constructor(private activatedRoute: ActivatedRoute,
-        private gotLive: GotLiveService) {
+                private gotLive: GotLiveService) {
     }
 
     public ngOnInit(): void {

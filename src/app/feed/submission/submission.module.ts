@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
 
 import { SubmissionRoutingModule } from './submission-routing.module';
@@ -11,11 +10,9 @@ import {
     SubmissionTitleComponent
 } from './components';
 import {
-    MaterialModule
-} from '@angular/material';
-import {
     UtilModule
 } from './../../util/';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
     declarations: [
         SubmissionComponent,
@@ -25,9 +22,8 @@ import {
     ],
     imports: [
         CommonModule,
-        HttpModule,
+        HttpClientModule,
         ReactiveFormsModule,
-        MaterialModule,
         SubmissionRoutingModule,
         UtilModule
     ],

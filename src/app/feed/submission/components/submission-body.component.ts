@@ -7,7 +7,7 @@ import {
 
 @Component({
     templateUrl: './submission-body.component.html',
-    styleUrls: ['submission-body.component.css'],
+    styleUrls: ['submission-body.component.scss'],
     selector: 'app-submission-body'
 })
 export class SubmissionBodyComponent implements OnChanges {

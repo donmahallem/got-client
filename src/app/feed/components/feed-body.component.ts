@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
 @Component({
     selector: 'app-feed-body',
     templateUrl: './feed-body.component.html',
-    styleUrls: ['./feed-body.component.css']
+    styleUrls: ['./feed-body.component.scss']
 })
 export class FeedBodyComponent implements OnDestroy {
     sidebarOpen: boolean;

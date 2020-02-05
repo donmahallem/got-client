@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 @Component({
     selector: 'app-feed-toolbar',
     templateUrl: './feed-toolbar.component.html',
-    styleUrls: ['./feed-toolbar.component.css']
+    styleUrls: ['./feed-toolbar.component.scss']
 })
 export class FeedToolbarComponent implements OnDestroy {
     private sidebarSubscription: Subscription;

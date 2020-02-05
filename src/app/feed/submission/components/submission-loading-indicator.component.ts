@@ -5,7 +5,7 @@ import {
 @Component({
     selector: 'app-submission-loading-indicator',
     templateUrl: './submission-loading-indicator.component.html',
-    styleUrls: ['./submission-loading-indicator.component.css']
+    styleUrls: ['./submission-loading-indicator.component.scss']
 })
 export class SubmissionLoadingIndicatorComponent {
 }

@@ -15,7 +15,7 @@ import {
 @Component({
     selector: 'app-feed-list-item',
     templateUrl: './feed-list-item.component.html',
-    styleUrls: ['./feed-list-item.component.css']
+    styleUrls: ['./feed-list-item.component.scss']
 })
 export class FeedListItemComponent implements OnDestroy, OnChanges {
 

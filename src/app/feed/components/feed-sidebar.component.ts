@@ -13,7 +13,7 @@ import {
 @Component({
     selector: 'app-feed-sidebar',
     templateUrl: './feed-sidebar.component.html',
-    styleUrls: ['./feed-sidebar.component.css']
+    styleUrls: ['./feed-sidebar.component.scss']
 })
 export class FeedSidebarComponent implements OnDestroy {
 

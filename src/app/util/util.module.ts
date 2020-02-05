@@ -3,7 +3,7 @@ import {
 } from '@angular/core';
 import {
     MomentFromNowPipe
-} from './';
+} from './moment-from-now.pipe';
 @NgModule({
     declarations: [
         MomentFromNowPipe

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
 
 import { FeedRoutingModule } from './feed-routing.module';
@@ -20,10 +19,7 @@ import {
 import {
     UtilModule
 } from './../util/';
-import {
-    MaterialModule
-} from '@angular/material';
-
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
     declarations: [
         FeedComponent,
@@ -36,9 +32,8 @@ import {
     ],
     imports: [
         CommonModule,
-        HttpModule,
+        HttpClientModule,
         ReactiveFormsModule,
-        MaterialModule,
         FeedRoutingModule,
         UtilModule
     ],

@@ -5,7 +5,7 @@ import {
 @Component({
     selector: 'app-submission-title',
     templateUrl: './submission-title.component.html',
-    styleUrls: ['./submission-title.component.css']
+    styleUrls: ['./submission-title.component.scss']
 })
 export class SubmissionTitleComponent {
     @Input()

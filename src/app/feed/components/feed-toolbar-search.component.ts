@@ -8,7 +8,6 @@ import {
 import {
     Router
 } from '@angular/router';
-import 'rxjs/add/operator/startWith';
 import {
     SearchUtil
 } from './../../util/';
@@ -18,7 +17,7 @@ import { debounceTime } from 'rxjs/operators';
 @Component({
     selector: 'app-feed-toolbar-search',
     templateUrl: './feed-toolbar-search.component.html',
-    styleUrls: ['./feed-toolbar-search.component.css']
+    styleUrls: ['./feed-toolbar-search.component.scss']
 })
 export class FeedToolbarSearchComponent implements OnDestroy {
     public stateCtrl: FormControl;

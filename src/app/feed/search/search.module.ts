@@ -1,12 +1,8 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
 
 import { SearchRoutingModule } from './search-routing.module';
-import {
-    MaterialModule
-} from '@angular/material';
 import {
     UtilModule
 } from './../../util/';
@@ -17,6 +13,7 @@ import {
 import {
     SearchHighlightPipe
 } from './pipes';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [
@@ -26,9 +23,8 @@ import {
     ],
     imports: [
         CommonModule,
-        HttpModule,
+        HttpClientModule,
         ReactiveFormsModule,
-        MaterialModule,
         SearchRoutingModule,
         UtilModule
     ],

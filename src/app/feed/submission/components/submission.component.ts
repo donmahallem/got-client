@@ -9,7 +9,7 @@ import {
 import {
     RedditSubmission
 } from './../../../models/';
-import { Subscription } from 'Subscription';
+import { Subscription } from 'rxjs';
 import {
     RedditApiService
 } from './../../../services/';
@@ -19,14 +19,14 @@ import {
 
 @Component({
     templateUrl: './submission.component.html',
-    styleUrls: ['./submission.component.css']
+    styleUrls: ['./submission.component.scss']
 })
 export class SubmissionComponent implements OnInit, OnDestroy {
     public submission: RedditSubmission;
     private routeDataSubscription: Subscription;
     private routeParamsSubscription: Subscription;
     constructor(private route: ActivatedRoute,
-        private redditApi: RedditApiService) {
+                private redditApi: RedditApiService) {
         this.submission = route.snapshot.data.submission;
     }
 
