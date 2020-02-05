@@ -1,59 +1,44 @@
 import {
     TestBed,
     async,
-    ComponentFixture,
-    inject,
-    tick
-} from "@angular/core/testing";
+    ComponentFixture
+} from '@angular/core/testing';
 import {
     DebugElement,
     Component
-} from "@angular/core";
-import {
-    MdIcon,
-    MdListItem
-} from "@angular/material";
+} from '@angular/core';
 import {
     By
-} from "@angular/platform-browser";
+} from '@angular/platform-browser';
 import {
     FeedListItemComponent
-} from "./feed-list-item.component";
-import {
-    GotAuthService
-} from "./../../services";
+} from './feed-list-item.component';
 import {
     MomentFromNowPipe
-} from "./../../util/moment-from-now.pipe"
-import {
-    BrowserDynamicTestingModule
-} from "@angular/platform-browser-dynamic/testing";
+} from './../../util/moment-from-now.pipe';
 
 import {
     MaterialModule
-} from "@angular/material";
-import {
-    RouterTestingModule
-} from "@angular/router/testing";
+} from '@angular/material';
 import {
     RedditSubmission
-} from "./../../models/reddit-submission.model";
+} from './../../models/reddit-submission.model';
 import {
     click
-} from "./../../../testing/";
+} from './../../../testing/';
 import {
     Router
-} from "@angular/router";
+} from '@angular/router';
 
 
 const expectedSubmission: RedditSubmission = {
-    title: "[store] test title",
+    title: '[store] test title',
     created_utc: 2999,
-    name: "t3_abcde",
-    id: "abcde"
-}
+    name: 't3_abcde',
+    id: 'abcde'
+};
 @Component({
-    template: "<feed-list-item  [submission]=\"submission\"></feed-list-item>",
+    template: '<feed-list-item  [submission]="submission"></feed-list-item>',
 })
 class TestHostComponent {
     submission = expectedSubmission;
@@ -63,7 +48,7 @@ class RouterStub {
         return Promise.resolve(true);
     }
 }
-describe("FeedListItemComponent", () => {
+describe('FeedListItemComponent', () => {
     let testHost: TestHostComponent;
     let testHostFixture: ComponentFixture<TestHostComponent>;
     let router: Router;
@@ -88,27 +73,27 @@ describe("FeedListItemComponent", () => {
         testHostFixture.detectChanges();
     }));
 
-    it("should have as title \"[store] test title\"", () => {
-        let titleDebugElement: DebugElement = testHostFixture.debugElement.query(By.css("h4"));
+    it('should have as title "[store] test title"', () => {
+        const titleDebugElement: DebugElement = testHostFixture.debugElement.query(By.css('h4'));
         expect(titleDebugElement.nativeElement.textContent).toEqual(expectedSubmission.title);
     });
 
-    it("should have store as icon", () => {
-        let iconDebugElement: DebugElement = testHostFixture.debugElement.query(By.css("md-icon"));
-        expect(iconDebugElement.nativeElement.textContent).toEqual("store");
+    it('should have store as icon', () => {
+        const iconDebugElement: DebugElement = testHostFixture.debugElement.query(By.css('md-icon'));
+        expect(iconDebugElement.nativeElement.textContent).toEqual('store');
     });
 
-    it("should have same submission as host element", () => {
-        let listItemElement: DebugElement = testHostFixture.debugElement.query(By.css("feed-list-item"));
+    it('should have same submission as host element', () => {
+        const listItemElement: DebugElement = testHostFixture.debugElement.query(By.css('feed-list-item'));
         expect(listItemElement.componentInstance.submission).toBe(expectedSubmission);
     });
 
-    it("should trigger route by click", () => {
-        const spy = spyOn(router, "navigate");
-        let listItemElement: DebugElement = testHostFixture.debugElement.query(By.css("md-list-item"));
+    it('should trigger route by click', () => {
+        const spy = spyOn(router, 'navigate');
+        const listItemElement: DebugElement = testHostFixture.debugElement.query(By.css('md-list-item'));
         click(listItemElement);
         expect(spy.calls.count()).toEqual(1);
-        //console.log(navArgs);
-        //expect(navArgs.args[0].join()).toEqual("store");
+        // console.log(navArgs);
+        // expect(navArgs.args[0].join()).toEqual("store");
     });
 });

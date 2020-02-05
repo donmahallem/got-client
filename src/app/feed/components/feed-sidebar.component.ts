@@ -1,34 +1,25 @@
 import {
     Component,
     OnDestroy
-} from "@angular/core";
-import {
-    RedditSubmissions
-} from "./../../models/"
-import {
-    RedditApiService
-} from "./../../services/reddit-api.service";
-import {
-    GotLiveService
-} from "./../../services/";
+} from '@angular/core';
 import {
     FeedService
-} from "./../feed.service";
+} from './../feed.service';
 import {
     Subscription
-} from "rxjs/Subscription";
+} from 'rxjs/Subscription';
 import {
     FeedFilter
-} from "./../feed-filter.model";
+} from './../feed-filter.model';
 import {
     FormControl,
     FormGroup
-} from "@angular/forms";
+} from '@angular/forms';
 
 @Component({
-    selector: "feed-sidebar",
-    templateUrl: "./feed-sidebar.component.html",
-    styleUrls: ["./feed-sidebar.component.css"]
+    selector: 'feed-sidebar',
+    templateUrl: './feed-sidebar.component.html',
+    styleUrls: ['./feed-sidebar.component.css']
 })
 export class FeedSidebarComponent implements OnDestroy {
 
@@ -52,6 +43,6 @@ export class FeedSidebarComponent implements OnDestroy {
     }
 
     public ngOnDestroy() {
-        //this.filterSubscription.unsubscribe();
+        // this.filterSubscription.unsubscribe();
     }
 }

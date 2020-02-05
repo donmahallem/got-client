@@ -1,13 +1,13 @@
 export {
     RedditSubmission,
     RedditSubmissions
-} from "./reddit-submission.model";
+} from './reddit-submission.model';
 export {
     RedditListingResponse
-} from "./reddit-listing-response.model";
+} from './reddit-listing-response.model';
 export {
     VoteState
-} from "./vote-state.model";
+} from './vote-state.model';
 export {
     GotUser
-}from "./got-user.model";
+}from './got-user.model';

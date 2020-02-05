@@ -1,22 +1,21 @@
-import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
-import { ReactiveFormsModule } from "@angular/forms";
-import { HttpModule } from "@angular/http";
-import { CommonModule } from "@angular/common";
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { CommonModule } from '@angular/common';
 
-import { SubmissionRoutingModule } from "./submission-routing.module";
+import { SubmissionRoutingModule } from './submission-routing.module';
 import {
     SubmissionComponent,
     SubmissionBodyComponent,
     SubmissionLoadingIndicatorComponent,
     SubmissionTitleComponent
-} from "./components";
+} from './components';
 import {
     MaterialModule
-} from "@angular/material";
+} from '@angular/material';
 import {
     UtilModule
-} from "./../../util/";
+} from './../../util/';
 @NgModule({
     declarations: [
         SubmissionComponent,

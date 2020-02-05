@@ -4,18 +4,18 @@ import {
     inject,
     fakeAsync,
     tick
-} from "@angular/core/testing";
+} from '@angular/core/testing';
 import {
     FeedService
-} from "./feed.service";
+} from './feed.service';
 import {
     Subscription
-} from "rxjs/subscription";
+} from 'rxjs/subscription';
 import {
     FeedFilter
-} from "./feed-filter.model";
+} from './feed-filter.model';
 
-describe("FeedService", () => {
+describe('FeedService', () => {
     let feedService: FeedService;
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -28,10 +28,10 @@ describe("FeedService", () => {
         }).compileComponents();
         feedService = TestBed.get(FeedService);
     }));
-    describe("sidebarOpen", () => {
-        it("should trigger the sidebarOpenObservable", fakeAsync(inject([FeedService], (feedService: FeedService) => {
-            let spy: jasmine.Spy = jasmine.createSpy("open");
-            let subscription: Subscription = feedService.sidebarOpenObservable.subscribe(spy);
+    describe('sidebarOpen', () => {
+        it('should trigger the sidebarOpenObservable', fakeAsync(inject([FeedService], (feedService: FeedService) => {
+            const spy: jasmine.Spy = jasmine.createSpy('open');
+            const subscription: Subscription = feedService.sidebarOpenObservable.subscribe(spy);
             feedService.sidebarOpen = true;
             tick();
             feedService.sidebarOpen = false;
@@ -41,10 +41,10 @@ describe("FeedService", () => {
             subscription.unsubscribe();
         })));
     });
-    describe("toggleSidebar()", () => {
-        it("should trigger the sidebarOpenObservable", fakeAsync(inject([FeedService], (feedService: FeedService) => {
-            let spy: jasmine.Spy = jasmine.createSpy("open");
-            let subscription: Subscription = feedService.sidebarOpenObservable.subscribe(spy);
+    describe('toggleSidebar()', () => {
+        it('should trigger the sidebarOpenObservable', fakeAsync(inject([FeedService], (feedService: FeedService) => {
+            const spy: jasmine.Spy = jasmine.createSpy('open');
+            const subscription: Subscription = feedService.sidebarOpenObservable.subscribe(spy);
             feedService.toggleSidebar();
             tick();
             feedService.toggleSidebar();
@@ -58,8 +58,8 @@ describe("FeedService", () => {
             subscription.unsubscribe();
         })));
     });
-    describe("sidebarOpen", () => {
-        it("should get the values accordingly", fakeAsync(inject([FeedService], (feedService: FeedService) => {
+    describe('sidebarOpen', () => {
+        it('should get the values accordingly', fakeAsync(inject([FeedService], (feedService: FeedService) => {
             feedService.sidebarOpen = true;
             tick();
             expect(feedService.sidebarOpen).toBeTruthy();
@@ -68,22 +68,22 @@ describe("FeedService", () => {
             expect(feedService.sidebarOpen).toBeFalsy();
         })));
     });
-    describe("feedFilter", () => {
+    describe('feedFilter', () => {
         let testObj: FeedFilter;
         beforeAll(() => {
             testObj = new FeedFilter();
             testObj.pricecheck = false;
             testObj.psa = false;
             feedService.feedFilter = testObj;
-        })
-        it("should set the value of the getter", fakeAsync(inject([FeedService], (feedService: FeedService) => {
+        });
+        it('should set the value of the getter', fakeAsync(inject([FeedService], (feedService: FeedService) => {
             feedService.feedFilter = testObj;
             tick();
             expect(feedService.feedFilter).toEqual(jasmine.objectContaining(testObj));
         })));
-        it("should trigger the observable", fakeAsync(inject([FeedService], (feedService: FeedService) => {
-            let spy: jasmine.Spy = jasmine.createSpy("open");
-            let subscription: Subscription = feedService.feedFilterObservable.subscribe(spy);
+        it('should trigger the observable', fakeAsync(inject([FeedService], (feedService: FeedService) => {
+            const spy: jasmine.Spy = jasmine.createSpy('open');
+            const subscription: Subscription = feedService.feedFilterObservable.subscribe(spy);
             feedService.feedFilter = testObj;
             tick();
             expect(spy.calls.argsFor(1)[0]).toEqual(jasmine.objectContaining(testObj));

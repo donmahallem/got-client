@@ -1,12 +1,12 @@
 export {
     MomentFromNowPipe
-} from "./moment-from-now.pipe";
+} from './moment-from-now.pipe';
 export {
     Logger
-} from "./logger";
+} from './logger';
 export {
     SearchUtil
-} from "./search-util";
-export{
+} from './search-util';
+export {
     UtilModule
-}from "./util.module";
+}from './util.module';

@@ -1,12 +1,12 @@
 export {
     SubmissionBodyComponent
-} from "./submission-body.component";
+} from './submission-body.component';
 export {
     SubmissionComponent
-} from "./submission.component";
+} from './submission.component';
 export {
     SubmissionTitleComponent
-} from "./submission-title.component";
+} from './submission-title.component';
 export {
     SubmissionLoadingIndicatorComponent
-} from "./submission-loading-indicator.component"
+} from './submission-loading-indicator.component';

@@ -23,27 +23,27 @@ export class RedditSubmission {
     over_18: boolean;
 
     public static parseType(submission: RedditSubmission): RedditSubmissionType {
-        if (typeof submission.link_flair_text === "string"
-            && submission.link_flair_text !== "") {
+        if (typeof submission.link_flair_text === 'string'
+            && submission.link_flair_text !== '') {
             const txt = submission.link_flair_text.toLowerCase();
-            if (txt === "discuss") {
+            if (txt === 'discuss') {
                 return RedditSubmissionType.DISCUSSION;
-            } else if (txt === "psa") {
+            } else if (txt === 'psa') {
                 return RedditSubmissionType.PSA;
-            } else if (txt === "trade") {
+            } else if (txt === 'trade') {
                 return RedditSubmissionType.TRADE;
-            } else if (txt === "store") {
+            } else if (txt === 'store') {
                 return RedditSubmissionType.STORE;
-            } else if (txt === "free") {
+            } else if (txt === 'free') {
                 return RedditSubmissionType.FREE;
-            } else if (txt === "pricecheck") {
+            } else if (txt === 'pricecheck') {
                 return RedditSubmissionType.PRICECHECK;
-            } else if (txt === "question") {
+            } else if (txt === 'question') {
                 return RedditSubmissionType.QUESTION;
             }
         }
-        if (typeof submission.title === "string"
-            && submission.title !== "") {
+        if (typeof submission.title === 'string'
+            && submission.title !== '') {
             if (submission.title.match(/\[(W|H)\].*\[(W|H)\]/i)) {
                 return RedditSubmissionType.TRADE;
             } else if (submission.title.match(/\[store\].*/i)) {
@@ -57,4 +57,4 @@ export class RedditSubmission {
         return RedditSubmissionType.OTHER;
     }
 }
-export type RedditSubmissions = RedditSubmission[]; 
+export type RedditSubmissions = RedditSubmission[];

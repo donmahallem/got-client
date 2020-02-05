@@ -1,25 +1,23 @@
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
 import {
     RouterModule,
-    Routes,
-    Data
-} from "@angular/router";
-import { BrowserModule } from "@angular/platform-browser";
+    Routes
+} from '@angular/router';
 
 
 const rootRoutes: Routes = [
     {
-        path: "feed",
-        loadChildren: "app/feed/feed.module#FeedModule"
+        path: 'feed',
+        loadChildren: 'app/feed/feed.module#FeedModule'
     },
     {
-        path: "login",
-        loadChildren: "app/login/login.module#LoginModule"
+        path: 'login',
+        loadChildren: 'app/login/login.module#LoginModule'
     },
     {
-        path: "",
-        redirectTo: "feed",
-        pathMatch: "full"
+        path: '',
+        redirectTo: 'feed',
+        pathMatch: 'full'
     }
 ];
 

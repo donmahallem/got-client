@@ -1,43 +1,33 @@
 import {
     Component,
     OnDestroy
-} from "@angular/core";
+} from '@angular/core';
 import {
     FormControl
-} from "@angular/forms";
+} from '@angular/forms';
 import {
     Router
-} from "@angular/router";
-import {
-    trigger,
-    state,
-    style,
-    animate,
-    transition
-} from "@angular/animations";
-import "rxjs/add/operator/startWith";
+} from '@angular/router';
+import 'rxjs/add/operator/startWith';
 import {
     Subscription
-} from "rxjs/Subscription";
-import {
-    Observable
-} from "rxjs/Observable";
+} from 'rxjs/Subscription';
 import {
     SearchUtil
-} from "./../../util/";
+} from './../../util/';
 
 @Component({
-    selector: "feed-toolbar-search",
-    templateUrl: "./feed-toolbar-search.component.html",
-    styleUrls: ["./feed-toolbar-search.component.css"]
+    selector: 'feed-toolbar-search',
+    templateUrl: './feed-toolbar-search.component.html',
+    styleUrls: ['./feed-toolbar-search.component.css']
 })
 export class FeedToolbarSearchComponent implements OnDestroy {
     public stateCtrl: FormControl;
     filteredStates: any;
 
     states = [
-        "Alabama",
-        "Alaska",
+        'Alabama',
+        'Alaska',
     ];
     private inputSubscription: Subscription;
     constructor(private router: Router) {
@@ -46,7 +36,7 @@ export class FeedToolbarSearchComponent implements OnDestroy {
             .debounceTime(500)
             .subscribe(value => {
                 console.log(value);
-                this.router.navigate(["feed", "search"], {
+                this.router.navigate(['feed', 'search'], {
                     queryParams: {
                         q: SearchUtil.sanitize(this.stateCtrl.value)
                     }
@@ -59,13 +49,13 @@ export class FeedToolbarSearchComponent implements OnDestroy {
     }
 
     public filterStates(val: string) {
-        return val ? this.states.filter(s => new RegExp(`^${val}`, "gi").test(s))
+        return val ? this.states.filter(s => new RegExp(`^${val}`, 'gi').test(s))
             : this.states;
     }
 
     public search(): void {
-        if (this.stateCtrl.value !== "" && this.stateCtrl.value) {
-            this.router.navigate(["feed", "search"], {
+        if (this.stateCtrl.value !== '' && this.stateCtrl.value) {
+            this.router.navigate(['feed', 'search'], {
                 queryParams: {
                     q: SearchUtil.sanitize(this.stateCtrl.value)
                 }

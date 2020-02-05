@@ -1,23 +1,22 @@
-import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
-import { ReactiveFormsModule } from "@angular/forms";
-import { HttpModule } from "@angular/http";
-import { CommonModule } from "@angular/common";
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { CommonModule } from '@angular/common';
 
-import { SearchRoutingModule } from "./search-routing.module";
+import { SearchRoutingModule } from './search-routing.module';
 import {
     MaterialModule
-} from "@angular/material";
+} from '@angular/material';
 import {
     UtilModule
-} from "./../../util/";
+} from './../../util/';
 import {
     SearchComponent,
     SearchResultItemComponent
-} from "./components";
+} from './components';
 import {
     SearchHighlightPipe
-} from "./pipes";
+} from './pipes';
 
 @NgModule({
     declarations: [

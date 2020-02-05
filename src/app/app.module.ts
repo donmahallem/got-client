@@ -1,35 +1,29 @@
 import {
     BrowserModule
-} from "@angular/platform-browser";
+} from '@angular/platform-browser';
 import {
     NgModule,
-    APP_INITIALIZER
-} from "@angular/core";
+    APP_INITIALIZER,
+} from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import {
     FormsModule
-} from "@angular/forms";
-import {
-    HttpModule
-} from "@angular/http";
-
+} from '@angular/forms';
 import {
     AppComponent
-} from "./app.component";
+} from './app.component';
 import {
     AppRoutingModule
-} from "./app-routing.module";
-import {
-    MaterialModule
-} from "@angular/material";
+} from './app-routing.module';
 import {
     BrowserAnimationsModule
-} from "@angular/platform-browser/animations";
+} from '@angular/platform-browser/animations';
 import {
     AppConfigService,
     GotAuthService,
     GotApiService,
     GotLiveService
-} from "./services/"
+} from './services/';
 
 
 export function configServiceFactory(config: AppConfigService) {
@@ -43,9 +37,8 @@ export function configServiceFactory(config: AppConfigService) {
     imports: [
         BrowserModule,
         FormsModule,
-        HttpModule,
+        HttpClientModule,
         BrowserAnimationsModule,
-        MaterialModule,
         AppRoutingModule
     ],
     exports: [],

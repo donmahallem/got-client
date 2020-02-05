@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { FeedFilter } from "./feed-filter.model";
+import { FeedFilter } from './feed-filter.model';
 @Injectable()
 export class FeedService {
     // Observable string sources

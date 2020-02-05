@@ -1,26 +1,18 @@
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
 import {
     RouterModule,
-    Routes,
-    Data
-} from "@angular/router";
-import { BrowserModule } from "@angular/platform-browser";
-import { LoginComponent } from "./login.component";
-import { AuthorizeComponent } from "./authorize.component";
-import {
-    MaterialModule,
-    MdIcon,
-    MdIconModule,
-    MdListModule
-} from "@angular/material";
+    Routes
+} from '@angular/router';
+import { LoginComponent } from './login.component';
+import { AuthorizeComponent } from './authorize.component';
 
 const rootRoutes: Routes = [
     {
-        path: "",
+        path: '',
         component: LoginComponent
     },
     {
-        path: "reddit/authorize",
+        path: 'reddit/authorize',
         component: AuthorizeComponent
     }
 ];

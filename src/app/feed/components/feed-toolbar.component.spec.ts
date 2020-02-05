@@ -2,69 +2,58 @@ import {
     TestBed,
     async,
     ComponentFixture,
-    inject,
     tick,
     fakeAsync
-} from "@angular/core/testing";
+} from '@angular/core/testing';
 import {
     DebugElement,
     Component
-} from "@angular/core";
-import {
-    MdIcon,
-    MdListItem
-} from "@angular/material";
+} from '@angular/core';
 import {
     By
-} from "@angular/platform-browser";
+} from '@angular/platform-browser';
 import {
     FeedToolbarComponent
-} from "./feed-toolbar.component";
-import {
-    FeedToolbarSearchComponent
-} from "./feed-toolbar-search.component";
-import {
-    BrowserDynamicTestingModule
-} from "@angular/platform-browser-dynamic/testing";
+} from './feed-toolbar.component';
 import {
     MaterialModule
-} from "@angular/material";
+} from '@angular/material';
 import {
     click
-} from "./../../../testing/";
+} from './../../../testing/';
 import {
     FeedService
-} from "./../feed.service";
+} from './../feed.service';
 import {
     Observable
-} from "rxjs/Observable";
+} from 'rxjs/Observable';
 import {
     BehaviorSubject
-} from "rxjs/BehaviorSubject";
+} from 'rxjs/BehaviorSubject';
 import {
     Router
-} from "@angular/router";
+} from '@angular/router';
 
 const sidebarOpenSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
 @Component({
-    selector: "feed-toolbar-search",
-    template: "<p>test</p>"
+    selector: 'feed-toolbar-search',
+    template: '<p>test</p>'
 })
 class FeedToolbarSearchComponentStub {
 }
 class FeedServiceStub {
+    public sidebarOpenObservable: Observable<boolean> = sidebarOpenSubject.asObservable();
     public toggleSidebar(): void {
 
     }
-    public sidebarOpenObservable: Observable<boolean> = sidebarOpenSubject.asObservable();
 }
 class RouterStub {
-    public navigate = jasmine.createSpy("navigate", (url: any[], args: any) => {
+    public navigate = jasmine.createSpy('navigate', (url: any[], args: any) => {
 
     });
 }
-describe("FeedToolbarComponent", () => {
+describe('FeedToolbarComponent', () => {
     let componentFixture: ComponentFixture<FeedToolbarComponent>;
     let feedService: FeedService;
     beforeEach(async(() => {
@@ -92,26 +81,26 @@ describe("FeedToolbarComponent", () => {
         componentFixture.detectChanges();
     }));
 
-    describe("sidebar toggle button", () => {
+    describe('sidebar toggle button', () => {
         let sidebarToggleDebugElement: DebugElement;
         beforeEach(() => {
-            sidebarToggleDebugElement = componentFixture.debugElement.query(By.css("button.sidebarToggle"));
-        })
-        it("should trigger sidebarToggle service function", () => {
-            let spy: jasmine.Spy = spyOn(feedService, "toggleSidebar");
+            sidebarToggleDebugElement = componentFixture.debugElement.query(By.css('button.sidebarToggle'));
+        });
+        it('should trigger sidebarToggle service function', () => {
+            const spy: jasmine.Spy = spyOn(feedService, 'toggleSidebar');
             click(sidebarToggleDebugElement);
             expect(spy.calls.count()).toEqual(1);
         });
-        it("should switch symbol depending on state", fakeAsync(() => {
-            let icon: DebugElement = sidebarToggleDebugElement.query(By.css("md-icon"));
+        it('should switch symbol depending on state', fakeAsync(() => {
+            const icon: DebugElement = sidebarToggleDebugElement.query(By.css('md-icon'));
             sidebarOpenSubject.next(true);
             tick();
             componentFixture.detectChanges();
-            expect(icon.nativeElement.textContent).toEqual("arrow_back");
+            expect(icon.nativeElement.textContent).toEqual('arrow_back');
             sidebarOpenSubject.next(false);
             componentFixture.detectChanges();
             tick();
-            expect(icon.nativeElement.textContent).toEqual("menu");
+            expect(icon.nativeElement.textContent).toEqual('menu');
         }));
     });
 });

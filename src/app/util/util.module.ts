@@ -1,9 +1,9 @@
 import {
     NgModule
-} from "@angular/core";
+} from '@angular/core';
 import {
     MomentFromNowPipe
-} from "./"
+} from './';
 @NgModule({
     declarations: [
         MomentFromNowPipe

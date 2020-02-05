@@ -2,26 +2,24 @@ import {
     TestBed,
     async,
     inject
-} from "@angular/core/testing";
+} from '@angular/core/testing';
 import {
     Http,
-    Headers,
-    RequestOptions,
     Response,
     BaseRequestOptions,
     XHRBackend,
     ResponseOptions,
     RequestMethod
-} from "@angular/http";
+} from '@angular/http';
 import {
     MockBackend,
     MockConnection
-} from "@angular/http/testing";
+} from '@angular/http/testing';
 import {
     GotAuthService
-} from "./got-auth.service";
+} from './got-auth.service';
 
-describe("GotLiveService", () => {
+describe('GotLiveService', () => {
     let gotAuthService: GotAuthService;
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -44,17 +42,17 @@ describe("GotLiveService", () => {
         }).compileComponents();
         gotAuthService = TestBed.get(GotAuthService);
     }));
-    describe("exchangeRefreshToken()", () => {
+    describe('exchangeRefreshToken()', () => {
         beforeEach(async(() => {
 
         }));
-        it("should exchange successfully", async(inject([MockBackend], (mockBackend: MockBackend) => {
+        it('should exchange successfully', async(inject([MockBackend], (mockBackend: MockBackend) => {
             mockBackend.connections.subscribe(
                 (connection: MockConnection) => {
                     expect(connection.request.method).toEqual(RequestMethod.Post);
                     expect(JSON.parse(connection.request.getBody())).toEqual(jasmine.objectContaining({
-                        "type": "refresh_token",
-                        "refresh_token": "test_token"
+                        type: 'refresh_token',
+                        refresh_token: 'test_token'
                     }));
                     connection.mockRespond(new Response(
                         new ResponseOptions({
@@ -62,7 +60,7 @@ describe("GotLiveService", () => {
                         }
                         )));
                 });
-            gotAuthService.exchangeRefreshToken("test_token")
+            gotAuthService.exchangeRefreshToken('test_token')
                 .subscribe(resp => {
                     expect(resp).toBeTruthy();
                 });

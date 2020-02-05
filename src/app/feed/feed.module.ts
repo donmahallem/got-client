@@ -1,10 +1,9 @@
-import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
-import { ReactiveFormsModule } from "@angular/forms";
-import { HttpModule } from "@angular/http";
-import { CommonModule } from "@angular/common";
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { CommonModule } from '@angular/common';
 
-import { FeedRoutingModule } from "./feed-routing.module";
+import { FeedRoutingModule } from './feed-routing.module';
 import {
     FeedSidebarComponent,
     FeedComponent,
@@ -13,17 +12,17 @@ import {
     FeedListComponent,
     FeedListItemComponent,
     FeedToolbarSearchComponent
-} from "./components";
+} from './components';
 import {
     RedditApiService,
     GotApiService
-} from "./../services/";
+} from './../services/';
 import {
     UtilModule
-} from "./../util/";
+} from './../util/';
 import {
     MaterialModule
-} from "@angular/material";
+} from '@angular/material';
 
 @NgModule({
     declarations: [

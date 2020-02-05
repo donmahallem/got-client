@@ -1,28 +1,26 @@
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
 import {
     RouterModule,
-    Routes,
-    Data
-} from "@angular/router";
-import { BrowserModule } from "@angular/platform-browser";
-import { NotFoundComponent } from "./not-found.component";
+    Routes
+} from '@angular/router';
+import { NotFoundComponent } from './not-found.component';
 
 const rootRoutes: Routes = [
     {
-        path: "feed",
-        loadChildren: "app/feed/feed.module#FeedModule"
+        path: 'feed',
+        loadChildren: () => import('./feed/feed.module').then((m) => m.FeedModule)
     },
     {
-        path: "login",
-        loadChildren: "app/login/login.module#LoginModule"
+        path: 'login',
+        loadChildren: () => import('./login/login.module').then((m) => m.LoginModule)
     },
     {
-        path: "",
-        redirectTo: "feed",
-        pathMatch: "full"
+        path: '',
+        redirectTo: 'feed',
+        pathMatch: 'full'
     },
     {
-        path: "**",
+        path: '**',
         component: NotFoundComponent
     }
 ];

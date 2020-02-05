@@ -1,22 +1,22 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 import {
     Router
-} from "@angular/router";
+} from '@angular/router';
 import {
     AppConfigService
-} from "./../services/"
+} from './../services/';
 
 @Component({
-    templateUrl: "./login.component.html",
-    styleUrls: ["./login.component.css"]
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
     constructor(private router: Router,
-        private appConfig: AppConfigService) {
+                private appConfig: AppConfigService) {
     }
 
     public signin() {
-        window.location.href = this.appConfig.getConfig("redirect_uri");
+        window.location.href = this.appConfig.getConfig('redirect_uri');
     }
 
 }

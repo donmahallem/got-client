@@ -4,21 +4,18 @@ import {
     OnChanges,
     Input,
     SimpleChanges
-} from "@angular/core";
+} from '@angular/core';
 import {
     Router
-} from "@angular/router"
+} from '@angular/router';
 import {
     RedditSubmission
-} from "./../../models/"
-import {
-    Logger
-} from "./../../util/logger";
+} from './../../models/';
 
 @Component({
-    selector: "feed-list-item",
-    templateUrl: "./feed-list-item.component.html",
-    styleUrls: ["./feed-list-item.component.css"]
+    selector: 'feed-list-item',
+    templateUrl: './feed-list-item.component.html',
+    styleUrls: ['./feed-list-item.component.css']
 })
 export class FeedListItemComponent implements OnDestroy, OnChanges {
 
@@ -30,15 +27,15 @@ export class FeedListItemComponent implements OnDestroy, OnChanges {
 
     public ngOnChanges(changes: SimpleChanges) {
         if (this.submission.title.match(/\[(W|H)\].*\[(W|H)\]/i)) {
-            this.icon = "swap_horiz";
+            this.icon = 'swap_horiz';
         } else if (this.submission.title.match(/\[store\].*/i)) {
-            this.icon = "store";
+            this.icon = 'store';
         } else if (this.submission.title.match(/\[q\].*/i)) {
-            this.icon = "help_outline";
+            this.icon = 'help_outline';
         } else if (this.submission.title.match(/^\[pc\].*/i)) {
-            this.icon = "attach_money";
+            this.icon = 'attach_money';
         } else {
-            this.icon = "note";
+            this.icon = 'note';
         }
     }
 
@@ -46,6 +43,6 @@ export class FeedListItemComponent implements OnDestroy, OnChanges {
     }
 
     public click() {
-        this.router.navigate(["/feed/submission", this.submission.id]);
+        this.router.navigate(['/feed/submission', this.submission.id]);
     }
 }

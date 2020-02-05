@@ -1,10 +1,10 @@
-import { TestBed, async } from "@angular/core/testing";
+import { TestBed, async } from '@angular/core/testing';
 
-import { AppComponent } from "./app.component";
+import { AppComponent } from './app.component';
 import {
     RouterTestingModule
-} from "@angular/router/testing";
-describe("AppComponent", () => {
+} from '@angular/router/testing';
+describe('AppComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
@@ -19,7 +19,7 @@ describe("AppComponent", () => {
     it(`should have as title "app works!"`, async(() => {
         const fixture = TestBed.createComponent(AppComponent);
         const app = fixture.debugElement.componentInstance;
-        expect(app.title).toEqual("app works!");
+        expect(app.title).toEqual('app works!');
     }));
 
 });

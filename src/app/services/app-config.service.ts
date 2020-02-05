@@ -1,6 +1,6 @@
-import { Inject, Injectable } from "@angular/core";
-import { Http } from "@angular/http";
-import { Observable } from "rxjs/Rx";
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import { Observable } from 'rxjs/Rx';
 
 @Injectable()
 export class AppConfigService {
@@ -25,10 +25,10 @@ export class AppConfigService {
      */
     public load() {
         return new Promise((resolve, reject) => {
-            this.http.get("/api/v1/config").map(res => res.json()).catch((error: any): any => {
-                console.log("Configuration file 'env.json' could not be read");
+            this.http.get('/api/v1/config').map(res => res.json()).catch((error: any): any => {
+                console.log('Configuration file \'env.json\' could not be read');
                 resolve(true);
-                return Observable.throw("Server error");
+                return Observable.throw('Server error');
             }).subscribe((config) => {
                 this.config = config;
                 resolve(true);

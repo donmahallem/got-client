@@ -1,29 +1,28 @@
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
 import {
     RouterModule,
-    Routes,
-    Data
-} from "@angular/router";
+    Routes
+} from '@angular/router';
 import {
     SubmissionComponent, SubmissionBodyComponent
-} from "./components";
+} from './components';
 import {
     SubmissionResolver
-} from "./submission.resolver";
+} from './submission.resolver';
 
 const rootRoutes: Routes = [
     {
-        path: "",
+        path: '',
         children: [
             {
-                path: ":id",
+                path: ':id',
                 component: SubmissionComponent,
                 resolve: {
                     submission: SubmissionResolver
                 }
             },
             {
-                path: "**",
+                path: '**',
                 component: SubmissionBodyComponent,
             }
         ]

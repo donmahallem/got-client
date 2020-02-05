@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import {
-    Router, Resolve, RouterStateSnapshot,
+    Resolve, RouterStateSnapshot,
     ActivatedRouteSnapshot
 } from '@angular/router';
 import {
-    RedditSubmission,
-    VoteState
-} from "./../../models/"
+    RedditSubmission
+} from './../../models/';
 import {
     GotLiveService
 } from './../../services/';
@@ -17,7 +16,7 @@ export class SubmissionResolver implements Resolve<RedditSubmission> {
 
     }
     public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<RedditSubmission> {
-        let id = route.params['id'];
+        const id = route.params.id;
         return new Promise((resolve, reject) => {
             this.got.getSubmission(id)
                 .then(value => {
