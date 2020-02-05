@@ -9,7 +9,7 @@ import {
 import {
     RedditSubmission
 } from './../../../models/';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'Subscription';
 import {
     RedditApiService
 } from './../../../services/';
@@ -26,7 +26,7 @@ export class SubmissionComponent implements OnInit, OnDestroy {
     private routeDataSubscription: Subscription;
     private routeParamsSubscription: Subscription;
     constructor(private route: ActivatedRoute,
-                private redditApi: RedditApiService) {
+        private redditApi: RedditApiService) {
         this.submission = route.snapshot.data.submission;
     }
 
