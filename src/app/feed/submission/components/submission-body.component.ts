@@ -8,17 +8,17 @@ import {
 @Component({
     templateUrl: './submission-body.component.html',
     styleUrls: ['submission-body.component.css'],
-    selector: 'submission-body'
+    selector: 'app-submission-body'
 })
 export class SubmissionBodyComponent implements OnChanges {
-    @Input('content')
+    @Input()
     public content: string;
-    private _cachedContent: string;
+    private mCachedContent: string;
     constructor() { }
 
     public ngOnChanges(changes: SimpleChanges): void {
         if (changes.hasOwnProperty('content')) {
-            this._cachedContent = this.parseContent(changes.content.currentValue);
+            this.mCachedContent = this.parseContent(changes.content.currentValue);
         }
     }
     /**
@@ -46,6 +46,6 @@ export class SubmissionBodyComponent implements OnChanges {
     }
 
     public get cachedContent(): string {
-        return this._cachedContent;
+        return this.mCachedContent;
     }
 }

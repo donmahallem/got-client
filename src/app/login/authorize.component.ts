@@ -12,21 +12,21 @@ import {
     styleUrls: ['./authorize.component.css']
 })
 export class AuthorizeComponent {
-    constructor(private route: ActivatedRoute,
-                private gotAuth: GotAuthService,
-                private router: Router) {
+    constructor(route: ActivatedRoute,
+                gotAuth: GotAuthService,
+                router: Router) {
         if (route.snapshot.queryParams.hasOwnProperty('code')) {
             console.log(route.snapshot.queryParams.code);
             gotAuth.exchangeCode(route.snapshot.queryParams.code)
                 .subscribe(data => {
                     router.navigate(['feed']);
                 },
-                error => {
-                    router.navigate(['login']);
-                },
-                () => {
+                    error => {
+                        router.navigate(['login']);
+                    },
+                    () => {
 
-                });
+                    });
         }
     }
 

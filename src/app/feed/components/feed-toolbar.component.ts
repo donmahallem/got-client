@@ -6,10 +6,10 @@ import {
     Router
 } from '@angular/router';
 import { FeedService } from './../feed.service';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 @Component({
-    selector: 'feed-toolbar',
+    selector: 'app-feed-toolbar',
     templateUrl: './feed-toolbar.component.html',
     styleUrls: ['./feed-toolbar.component.css']
 })

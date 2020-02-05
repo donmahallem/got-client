@@ -1,17 +1,5 @@
 import { Injectable } from '@angular/core';
 import {
-    Http,
-    Response,
-    RequestOptions,
-    Headers,
-    RequestOptionsArgs,
-    Request,
-    RequestMethod
-} from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
-import {
     RedditSubmission,
     RedditListingResponse,
     GotUser
@@ -19,19 +7,21 @@ import {
 import {
     GotAuthService
 } from './got-auth.service';
+import { flatMap, catchError, map } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class GotApiService {
     private heroesUrl = 'https://api.reddit.com/r/GlobalOffensiveTrade/new';  // URL to web API
-    constructor(private http: Http,
+    constructor(private http: HttpClient,
                 private gotAuth: GotAuthService) { }
 
-    public upvote(item: string | RedditSubmission): Observable<boolean> {
-        const id = (item instanceof String) ? item : item.id;
-        const options = new RequestOptions({
-            method: RequestMethod.Post,
+    public upvote(item: string | RedditSubmission | any): Observable<boolean> {
+        const options = {
+            method: 'post',
             body: { action: 'upvote', id: item }
-        });
+        };
         return this.request('/api/v1/submission/vote', options)
             .map(data => {
                 return data.success || false;
@@ -39,37 +29,37 @@ export class GotApiService {
     }
 
     public getMe(): Observable<GotUser> {
-        const options: RequestOptionsArgs = {
-            method: RequestMethod.Get
+        const options = {
+            method: 'get'
         };
         return this.request('/api/v1/user/me', options);
     }
 
     public getNewSubmissions(): Observable<RedditListingResponse<RedditSubmission>> {
         return this.http.get(this.heroesUrl)
-            .map(this.extractData)
-            .catch(this.handleError);
+            .pipe(map(this.extractData),
+                catchError(this.handleError));
     }
 
     private extractData(res: Response) {
-        const body = res.json();
+        const body: any = res.json();
         return body.data || {};
     }
     private handleError(error: Response | any) {
         // In a real world app, you might use a remote logging infrastructure
         let errMsg: string;
         if (error instanceof Response) {
-            const body = error.json() || '';
+            const body: any = error.json() || '';
             const err = body.error || JSON.stringify(body);
             errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
         } else {
             errMsg = error.message ? error.message : error.toString();
         }
         console.error(errMsg);
-        return Observable.throw(errMsg);
+        return throwError(errMsg);
     }
 
-    private request(url: Request | string, requestArgs: RequestOptionsArgs): any {
+    private request(url: any, requestArgs: any): any {
         if (requestArgs.headers) {
             requestArgs.headers.set('Authorization', 'Bearer ' + this.gotAuth.access_token);
             requestArgs.headers.set('Content-Type', 'application/json');
@@ -80,22 +70,22 @@ export class GotApiService {
             });
         }
         return this.http.request(url, requestArgs)
-            .map(this.extractData)
-            .catch(sourceError => {
-                if (sourceError && sourceError.status === 401) {
-                    return this.gotAuth
-                        .refreshAccessToken()
-                        .flatMap((authResult: any) => {
-                            if (authResult) {
-                                // retry with new token
-                                requestArgs.headers.set('Authorization', 'Bearer ' + this.gotAuth.access_token);
-                                return this.http.request(url, requestArgs);
-                            }
-                            return Observable.throw(sourceError);
-                        });
-                } else {
-                    return Observable.throw(sourceError);
-                }
-            });
+            .pipe(map(this.extractData),
+                catchError(sourceError => {
+                    if (sourceError && sourceError.status === 401) {
+                        return this.gotAuth
+                            .refreshAccessToken()
+                            .pipe(flatMap((authResult: any) => {
+                                if (authResult) {
+                                    // retry with new token
+                                    requestArgs.headers.set('Authorization', 'Bearer ' + this.gotAuth.access_token);
+                                    return this.http.request(url, requestArgs);
+                                }
+                                return throwError(sourceError);
+                            }));
+                    } else {
+                        return throwError(sourceError);
+                    }
+                }));
     }
 }

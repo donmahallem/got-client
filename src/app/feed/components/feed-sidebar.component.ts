@@ -6,25 +6,17 @@ import {
     FeedService
 } from './../feed.service';
 import {
-    Subscription
-} from 'rxjs/Subscription';
-import {
-    FeedFilter
-} from './../feed-filter.model';
-import {
     FormControl,
     FormGroup
 } from '@angular/forms';
 
 @Component({
-    selector: 'feed-sidebar',
+    selector: 'app-feed-sidebar',
     templateUrl: './feed-sidebar.component.html',
     styleUrls: ['./feed-sidebar.component.css']
 })
 export class FeedSidebarComponent implements OnDestroy {
 
-    private feedFilter: FeedFilter;
-    private filterSubscription: Subscription;
     feedFilterForm: FormGroup;
     constructor(private feedService: FeedService) {
         /*this.filterSubscription = feedService.feedFilterObservable.subscribe(filter => {

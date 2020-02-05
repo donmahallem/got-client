@@ -3,9 +3,9 @@ import {
     OnDestroy
 } from '@angular/core';
 import { FeedService } from './../feed.service';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 @Component({
-    selector: 'feed-body',
+    selector: 'app-feed-body',
     templateUrl: './feed-body.component.html',
     styleUrls: ['./feed-body.component.css']
 })

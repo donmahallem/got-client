@@ -5,12 +5,7 @@ import {
 import {
     XmlEntities
 } from 'html-entities';
-import {
-    Subject
-} from 'rxjs/Subject';
-import {
-    Observable
-} from 'rxjs/Observable';
+import { Subject, Observable } from 'rxjs';
 
 export enum ChangeType {
     CREATE = 1,
@@ -58,17 +53,13 @@ export class SubmissionDatabase extends Dexie {
         return txt.toLowerCase().trim();
     }
 
-    /**
-     * Removes duplicates from the input array
-     * @param input
-     */
     public static removeDuplicates(input: string[]): string[] {
         const seen: { [key: string]: boolean; } = {};
         const result: string[] = [];
-        for (let i = 0; i < input.length; i++) {
-            if (!seen.hasOwnProperty(input[i]) && input[i].length > 1) {
-                seen[input[i]] = true;
-                result.push(input[i]);
+        for (const inp of input) {
+            if (!seen.hasOwnProperty(inp) && inp.length > 1) {
+                seen[inp] = true;
+                result.push(inp);
             }
         }
         return result;

@@ -2,12 +2,7 @@ import {
     Pipe,
     PipeTransform
 } from '@angular/core';
-import 'rxjs/add/operator/map';
 
-interface IdxMatch {
-    start: number;
-    end: number;
-}
 
 @Pipe({
     name: 'searchHighlight',
@@ -19,7 +14,7 @@ export class SearchHighlightPipe implements PipeTransform {
     private cache: string;
 
     transform(text: string, tags: string[]): any {
-        if (tags != this.tags || text != this.text) {
+        if (tags !== this.tags || text !== this.text) {
             this.tags = tags;
             this.text = text;
             let inp: string = text.replace(/\&amp\;/g, '&').replace(/\&lt\;/g, '<').replace(/\&gt\;/g, '>');
@@ -32,6 +27,7 @@ export class SearchHighlightPipe implements PipeTransform {
             const t: RegExp = new RegExp(/keys/, 'gi');
             let match: RegExpExecArray;
             let m: string = '_'.repeat(inp.length);
+            //tslint:disable
             while ((match = t.exec(inp)) != null) {
                 const from: number = Math.max(0, match.index - 5);
                 const to: number = Math.min(inp.length, match.index + match[0].length + 5);
@@ -42,7 +38,7 @@ export class SearchHighlightPipe implements PipeTransform {
             while ((match = aa.exec(m)) != null) {
                 ret += '...<b>' + inp.substr(match.index, match[0].length) + '</b>...';
             }
-            console.log(m, ret);
+            // tslint:enable
             this.cache = ret;
         }
         return this.cache;

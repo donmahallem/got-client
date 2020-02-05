@@ -13,7 +13,7 @@ import {
 } from './../../models/';
 
 @Component({
-    selector: 'feed-list-item',
+    selector: 'app-feed-list-item',
     templateUrl: './feed-list-item.component.html',
     styleUrls: ['./feed-list-item.component.css']
 })

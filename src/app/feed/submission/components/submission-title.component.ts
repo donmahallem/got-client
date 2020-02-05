@@ -3,16 +3,16 @@ import {
     Input
 } from '@angular/core';
 @Component({
-    selector: 'submission-title',
+    selector: 'app-submission-title',
     templateUrl: './submission-title.component.html',
     styleUrls: ['./submission-title.component.css']
 })
 export class SubmissionTitleComponent {
-    @Input('title')
+    @Input()
     public title: string;
-    @Input('createdUtc')
+    @Input()
     public createdUtc: number;
-    @Input('author')
+    @Input()
     public author: string;
     constructor() { }
 

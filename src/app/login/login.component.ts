@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
 import {
-    Router
-} from '@angular/router';
-import {
     AppConfigService
 } from './../services/';
 
@@ -11,8 +8,7 @@ import {
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-    constructor(private router: Router,
-                private appConfig: AppConfigService) {
+    constructor(private appConfig: AppConfigService) {
     }
 
     public signin() {

@@ -67,7 +67,8 @@ export class SubmissionComponent implements OnInit, OnDestroy {
                         this.submission = submission;
                         Logger.info('Successfully queried reddit for', submissionId, this.submission);
                     } else {
-                        Logger.info('Currently displaying other article than requested. Requested:', sub.children, 'Displaying:', this.submissionId);
+                        Logger.info('Currently displaying other article than requested. Requested:',
+                            sub.children, 'Displaying:', this.submissionId);
                     }
                 } else {
                     throw new Error('didnt get the requested thing');

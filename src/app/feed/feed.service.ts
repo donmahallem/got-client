@@ -12,6 +12,9 @@ export class FeedService {
     constructor() {
 
     }
+    public get sidebarOpen(): boolean {
+        return this.openSidebarSource.value;
+    }
     // Service message commands
     public set sidebarOpen(open: boolean) {
         this.openSidebarSource.next(open);
@@ -30,7 +33,4 @@ export class FeedService {
     }
 
 
-    public get sidebarOpen(): boolean {
-        return this.openSidebarSource.value;
-    }
 }

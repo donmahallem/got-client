@@ -10,14 +10,13 @@ import {
 } from '@angular/router';
 import 'rxjs/add/operator/startWith';
 import {
-    Subscription
-} from 'rxjs/Subscription';
-import {
     SearchUtil
 } from './../../util/';
+import { Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
-    selector: 'feed-toolbar-search',
+    selector: 'app-feed-toolbar-search',
     templateUrl: './feed-toolbar-search.component.html',
     styleUrls: ['./feed-toolbar-search.component.css']
 })
@@ -33,7 +32,7 @@ export class FeedToolbarSearchComponent implements OnDestroy {
     constructor(private router: Router) {
         this.stateCtrl = new FormControl();
         this.inputSubscription = this.stateCtrl.valueChanges
-            .debounceTime(500)
+            .pipe(debounceTime(500))
             .subscribe(value => {
                 console.log(value);
                 this.router.navigate(['feed', 'search'], {

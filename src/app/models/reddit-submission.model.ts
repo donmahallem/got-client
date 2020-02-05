@@ -1,4 +1,4 @@
-
+// tslint:disable:variable-name
 export enum RedditSubmissionType {
     OTHER = 0,
     STORE = 1,
