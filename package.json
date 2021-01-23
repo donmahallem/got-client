@@ -27,7 +27,7 @@
         "@angular/router": "11.1.0",
         "rxjs": "6.6.3",
         "core-js": "3.8.3",
-        "dexie": "2.0.4",
+        "dexie": "3.0.3",
         "html-entities": "2.0.4",
         "moment": "2.29.1",
         "tslib": "2.1.0",
