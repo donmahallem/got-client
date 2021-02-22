@@ -1,9 +1,9 @@
-import Dexie from 'dexie';
+import Dexie, { Transaction } from 'dexie';
 import {
     RedditSubmission
 } from './../models/';
 import {
-    XmlEntities
+    decode
 } from 'html-entities';
 import { Subject, Observable } from 'rxjs';
 
@@ -66,18 +66,18 @@ export class SubmissionDatabase extends Dexie {
     }
 
     public static parseSelfthml(input: string): string {
-        const doc = new DOMParser().parseFromString(XmlEntities.decode(input), 'text/html');
+        const doc = new DOMParser().parseFromString(decode(input), 'text/html');
         const text = doc.documentElement.textContent;
         return text;
     }
 
-    private deleteHook(primKey: any, obj: any, trans: Dexie.Transaction): void {
+    private deleteHook(primKey: any, obj: any, trans: Transaction): void {
         trans.on('complete', () => {
             this.changeSubject.next({ id: primKey, type: ChangeType.DELETE });
         });
     }
 
-    private createHook(primKey: any, obj: any, trans: Dexie.Transaction): void {
+    private createHook(primKey: any, obj: any, trans: Transaction): void {
         obj.searchWords = SubmissionDatabase.indexSubmission(obj);
         obj.type = RedditSubmission.parseType(obj);
         trans.on('complete', () => {
@@ -85,7 +85,7 @@ export class SubmissionDatabase extends Dexie {
         });
     }
 
-    private updateHook(mods: any, primKey: any, obj: any, trans: Dexie.Transaction) {
+    private updateHook(mods: any, primKey: any, obj: any, trans: Transaction) {
         trans.on('complete', () => {
             this.changeSubject.next({ id: primKey, type: ChangeType.UPDATE });
         });
