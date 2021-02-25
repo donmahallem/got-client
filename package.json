@@ -25,7 +25,7 @@
         "@angular/platform-browser": "11.2.3",
         "@angular/platform-browser-dynamic": "11.2.3",
         "@angular/router": "11.2.3",
-        "rxjs": "6.6.3",
+        "rxjs": "6.6.6",
         "core-js": "3.9.0",
         "dexie": "3.0.3",
         "html-entities": "2.1.0",
